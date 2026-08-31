@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://novapilot.pages.dev/sitemap.xml
