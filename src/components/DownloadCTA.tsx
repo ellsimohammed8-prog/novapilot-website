@@ -16,7 +16,7 @@ export const DownloadCTA: React.FC = () => {
   const [selectedFormat, setSelectedFormat] = useState<"installer" | "portable">("installer");
 
   // Official SHA-512 Checksum from latest.yml build
-  const sha512Checksum = "8YSaF3Oagp1C4MYxVMnCPII/GFD2h4b9ABPUXPULhLlXTWCmKoPUSLli1ltRAPcpTIE1Zb8GbiKSPEQzA+YUtA==";
+  const sha512Checksum = "vNbPK67tyzGaaCSY7AJDy52op0hO9p459Jmgccez2G8phSLCGtJqmR/oS2r0/8PzIx4U/hrQO9PEDI7+srvf9A==";
 
   const handleDownload = (format: "installer" | "portable") => {
     setSelectedFormat(format);
