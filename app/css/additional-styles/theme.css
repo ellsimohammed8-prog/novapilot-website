@@ -1,0 +1,49 @@
+/* ==========================================================================
+   NovaPilot AI — Executive Theme & Surface Utilities
+   Purged of legacy Cruip [data-aos] animation rules.
+   Replaced with executive hairline borders, surface hierarchy, and micro-interactions.
+   ========================================================================== */
+
+/* Executive Hairline Borders */
+.hairline-border {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.hairline-border-bright {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.hairline-border-cobalt {
+  border: 1px solid rgba(29, 78, 216, 0.45);
+}
+
+/* Executive Surface Hierarchy */
+.surface-base {
+  background-color: var(--color-ink-base, #0B0F19);
+}
+
+.surface-chassis {
+  background-color: var(--color-ink-chassis, #111827);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.surface-card {
+  background-color: rgba(17, 24, 39, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.surface-card:hover {
+  border-color: rgba(255, 255, 255, 0.16);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7);
+}
+
+.surface-elevated {
+  background-color: var(--color-ink-surface, #1E293B);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* Smooth Hardware Easing Utility */
+.transition-executive {
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}

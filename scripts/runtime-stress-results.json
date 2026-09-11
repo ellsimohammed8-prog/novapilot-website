@@ -1,0 +1,55 @@
+{
+  "timestamp": "2026-09-11T15:22:07.707Z",
+  "passedTests": 49,
+  "failedTests": 0,
+  "findings": [
+    {
+      "severity": "HIGH",
+      "area": "Three.js Resource Leak",
+      "description": "Unmount lifecycle fails to dispose 6 geometries (3 EdgesGeometry, 3 SphereGeometry beacons) and 9 materials (3 plane materials, 3 line materials, 3 beacon materials).",
+      "evidence": {
+        "allocatedGeometries": 8,
+        "disposedGeometries": 2,
+        "leakedGeometries": [
+          "EdgesGeometry-0",
+          "SphereGeometry-beacon-0",
+          "EdgesGeometry-1",
+          "SphereGeometry-beacon-1",
+          "EdgesGeometry-2",
+          "SphereGeometry-beacon-2"
+        ],
+        "allocatedMaterials": 11,
+        "disposedMaterials": 2,
+        "leakedMaterials": [
+          "MeshStandardMaterial-plane-0",
+          "LineBasicMaterial-0",
+          "MeshBasicMaterial-beacon-0",
+          "MeshStandardMaterial-plane-1",
+          "LineBasicMaterial-1",
+          "MeshBasicMaterial-beacon-1",
+          "MeshStandardMaterial-plane-2",
+          "LineBasicMaterial-2",
+          "MeshBasicMaterial-beacon-2"
+        ]
+      }
+    },
+    {
+      "severity": "MEDIUM",
+      "area": "Canvas Touch Div-by-Zero Risk",
+      "description": "If canvas.getBoundingClientRect() has width: 0 or height: 0 (e.g. initial hidden tab or collapsed DOM reflow), handleTouchMove produces Infinity, poisoning rootGroup.rotation into NaN/Infinity.",
+      "evidence": {
+        "targetRotY": null,
+        "poisonedEulerRotation": null
+      }
+    },
+    {
+      "severity": "LOW",
+      "area": "Unbounded Touch Rotation",
+      "description": "handleTouchMove does not clamp rotation targets. A touch drag extending past viewport bounds reaches targetRotY = 9.65 rad (>360° flip). Recommend Math.max/Math.min clamping to [-0.6, 0.6].",
+      "evidence": {
+        "targetRotY": 9.649999999999999,
+        "targetRotX": -6.007142857142857
+      }
+    }
+  ]
+}

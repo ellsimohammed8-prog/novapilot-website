@@ -1,0 +1,174 @@
+@import 'tailwindcss';
+
+/* Additional styles */
+@import './additional-styles/utility-patterns.css' layer(components);
+@import './additional-styles/theme.css';
+
+@plugin "@tailwindcss/forms" {
+  strategy: base;
+}
+
+@theme {
+  --font-inter: var(--font-inter), sans-serif;
+  --font-nacelle: var(--font-nacelle), sans-serif;
+
+  /* Executive Palette Tokens */
+  --color-cobalt-900: #002D62;
+  --color-cobalt-800: #003A8C;
+  --color-cobalt-700: #0047AB;
+  --color-cobalt-600: #0047AB;
+  --color-cobalt-500: #1D4ED8;
+  --color-cobalt-400: #2563EB;
+  --color-cobalt-300: #3B82F6;
+
+  /* Executive Deep Ink Surfaces */
+  --color-ink-base: #0B0F19;
+  --color-ink-chassis: #111827;
+  --color-ink-surface: #1E293B;
+  --color-ink-elevated: #334155;
+  --color-ink-950: #0B0F19;
+  --color-ink-900: #0F172A;
+  --color-ink-850: #111827;
+  --color-ink-800: #1E293B;
+  --color-ink-700: #334155;
+
+  /* Pure White & High Contrast Typography */
+  --color-pure-white: #FFFFFF;
+  --color-text-pure: #FFFFFF;
+  --color-text-high: #F8FAFC;
+  --color-text-body: #CBD5E1;
+  --color-text-muted: #94A3B8;
+
+  /* Hairline Borders & Structural Accents */
+  --color-hairline: rgba(255, 255, 255, 0.08);
+  --color-hairline-bright: rgba(255, 255, 255, 0.15);
+  --color-hairline-cobalt: rgba(29, 78, 216, 0.45);
+
+  /* Status Indicators */
+  --color-status-live: #10B981;
+  --color-status-stealth: #60A5FA;
+
+  /* Cybernetic Obsidian & Tri-Chroma Design Tokens (Compatibility) */
+  --color-obsidian: #030712;
+  --color-midnight: #0a0f1d;
+  --color-slate-950: #020617;
+  --color-gray-950: #030712;
+  --color-zinc-950: #09090b;
+  --color-brand-cyan: #06b6d4;
+  --color-brand-emerald: #10b981;
+  --color-brand-violet: #8b5cf6;
+
+  --text-xs: 0.8125rem;
+  --text-xs--line-height: 1.5384;
+  --text-sm: 0.875rem;
+  --text-sm--line-height: 1.5715;
+  --text-base: 0.9375rem;
+  --text-base--line-height: 1.5333;
+  --text-base--letter-spacing: -0.0125em;
+  --text-lg: 1.125rem;
+  --text-lg--line-height: 1.5;
+  --text-lg--letter-spacing: -0.0125em;
+  --text-xl: 1.25rem;
+  --text-xl--line-height: 1.5;
+  --text-xl--letter-spacing: -0.0125em;
+  --text-2xl: 1.5rem;
+  --text-2xl--line-height: 1.415;
+  --text-2xl--letter-spacing: -0.0268em;
+  --text-3xl: 1.75rem;
+  --text-3xl--line-height: 1.3571;
+  --text-3xl--letter-spacing: -0.0268em;
+  --text-4xl: 2.5rem;
+  --text-4xl--line-height: 1.1;
+  --text-4xl--letter-spacing: -0.0268em;
+  --text-5xl: 3.5rem;
+  --text-5xl--line-height: 1;
+  --text-5xl--letter-spacing: -0.0268em;
+  --text-6xl: 4rem;
+  --text-6xl--line-height: 1;
+  --text-6xl--letter-spacing: -0.0268em;
+  --text-7xl: 4.5rem;
+  --text-7xl--line-height: 1;
+  --text-7xl--letter-spacing: -0.0268em;
+
+  --animate-shine: shine 5s ease-in-out 500ms infinite;
+  --animate-gradient: gradient 6s linear infinite;
+
+  @keyframes shine {
+    0% {
+      top: 0;
+      transform: scaleY(5);
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.8;
+    }
+    20% {
+      top: 100%;
+      transform: scaleY(10);
+      opacity: 0;
+    }
+    100% {
+      top: 100%;
+      transform: scaleY(1);
+      opacity: 0;
+    }
+  }
+  @keyframes gradient {
+    to {
+      background-position: 200% center;
+    }
+  }
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+
+  /* Executive Cobalt Selection */
+  ::selection {
+    background-color: #1D4ED8;
+    color: #FFFFFF;
+  }
+
+  /* Executive Focus Visible */
+  :focus-visible {
+    outline: 2px solid #1D4ED8;
+    outline-offset: 2px;
+  }
+
+  /* Executive Refined Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0B0F19;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #1E293B;
+    border-radius: 4px;
+    border: 2px solid #0B0F19;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #334155;
+  }
+}
