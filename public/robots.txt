@@ -1,0 +1,52 @@
+﻿# robots.txt for NovaPilot AI
+# https://novapilotai.ellsimohammed8.workers.dev
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+
+# OpenAI SearchGPT & ChatGPT Crawler Directives
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+# Perplexity AI Search Crawler Directives
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Anthropic Claude Crawler Directives
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+# Google Search & Google-Extended (Gemini / AI Overviews)
+User-agent: Googlebot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# Microsoft Bing & Copilot
+User-agent: Bingbot
+Allow: /
+
+# Apple Intelligence
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Canonical Sitemap
+Sitemap: https://novapilotai.ellsimohammed8.workers.dev/sitemap.xml

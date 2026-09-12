@@ -11,6 +11,7 @@ import InteractiveArchitecture from "@/components/interactive-architecture";
 import MediaShowcase from "@/components/media-showcase";
 import FeaturesGrid from "@/components/features-grid";
 import SpecsTable from "@/components/specs-table";
+import GeoFaqSection from "@/components/geo-faq-section";
 import WindowsCta from "@/components/windows-cta";
 import ErrorBoundary from "@/components/error-boundary";
 
@@ -30,6 +31,7 @@ export default function Home() {
       </ErrorBoundary>
       <FeaturesGrid />
       <SpecsTable />
+      <GeoFaqSection />
       <WindowsCta />
     </>
   );

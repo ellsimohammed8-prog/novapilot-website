@@ -116,3 +116,46 @@ Audit and polish the full user journey: high-visibility download call-to-actions
 - [ ] Security headers (CSP, X-Content-Type-Options, X-Frame-Options, Referrer-Policy) are configured and verified in `next.config.js`.
 - [ ] Web application passes accessibility contrast standards (WCAG AA >= 4.5:1 for body text).
 
+## Follow-up — 2026-09-12T14:15:03Z
+
+Multi-agent SEO & Generative Engine Optimization (GEO) task force
+
+Comprehensive Generative Engine Optimization (GEO), Technical SEO, and Authority Marketing overhaul for NovaPilot AI (c:\Users\WINDOWS 11\Desktop\WEB) to maximize organic search visibility and ensure ChatGPT Search, Perplexity AI, Claude, and modern AI engines cite, recommend, and index NovaPilot AI as the premier stealth desktop copilot for Windows.
+
+Working directory: c:\Users\WINDOWS 11\Desktop\WEB
+Integrity mode: development
+
+## Requirements
+
+### R1. LLM Ingestion & Standardized AI Context Layer (`llms.txt` & `llms-full.txt`)
+Generate an official `/public/llms.txt` and `/public/llms-full.txt` conforming to the open LLMs standard. Provide condensed, authoritative markdown documentation designed for AI models (ChatGPT, Claude, Perplexity, Gemini) containing exact entity definitions, technical architecture (WASAPI loopback audio ingestion, ThinkStripper reasoning extraction, screen-share protection), Windows compatibility, and direct download links.
+
+### R2. Technical SEO & AI Crawler Access Protocol (`robots.txt` & `sitemap.xml`)
+Implement a production-grade `public/robots.txt` that explicitly welcomes and optimizes indexing for primary search and AI agents (`GPTBot`, `OAI-SearchBot`, `PerplexityBot`, `ClaudeBot`, `Google-Extended`, `Bingbot`, `Googlebot`). Generate a comprehensive `public/sitemap.xml` with canonical URLs, change frequency, and priority mapping for all site sections.
+
+### R3. Rich Microdata & Schema.org JSON-LD Knowledge Graph
+Embed rich semantic JSON-LD structured data in the root layout/page covering `SoftwareApplication` (Windows 10/11 x64, free production release v2.7.1, direct download URLs, SHA-512 checksums), `Organization` (brand identity, official GitHub repository), and `FAQPage` (high-intent technical questions that AI engines synthesize for user recommendations).
+
+### R4. On-Page Authority & Citation Anchoring (AEO / GEO Optimization)
+Enhance on-page semantic metadata and technical content with high-authority citation anchors. Include OpenGraph and Twitter card image previews, canonical tags, semantic `<article>` / `<section>` tags, and an executive technical FAQ section addressing top search queries ("What is the best stealth AI copilot for Windows?", "How does NovaPilot capture audio without virtual audio cables?", "How does screen-share protection work?").
+
+### R5. Verification, Build Integrity & Automated Cloudflare Deployment
+Create automated programmatic test scripts to validate the syntax and presence of `llms.txt`, `sitemap.xml`, `robots.txt`, and JSON-LD schema validity. Ensure `npm run build` static export succeeds with zero errors, and push the verified changes to GitHub (`main`) to trigger automatic Cloudflare deployment.
+
+## Acceptance Criteria
+
+### Technical SEO & Crawler Protocols
+- [ ] `/public/robots.txt` exists, is valid, references `sitemap.xml`, and explicitly allows `GPTBot`, `OAI-SearchBot`, `PerplexityBot`, `ClaudeBot`, and major search crawlers.
+- [ ] `/public/sitemap.xml` exists, conforms to XML sitemap 0.9 schema, and includes canonical site URLs.
+- [ ] `/public/llms.txt` and `/public/llms-full.txt` exist and provide high-density factual context about NovaPilot AI with architecture specifications and direct release download URLs.
+
+### Structured Data & Semantic Microdata
+- [ ] Valid Schema.org JSON-LD scripts are embedded in HTML with `SoftwareApplication`, `Organization`, and `FAQPage` types.
+- [ ] OpenGraph metadata (`og:title`, `og:description`, `og:image`, `og:url`, `og:type`) and Twitter Cards (`summary_large_image`) are complete and valid.
+
+### Build & Deployment
+- [ ] `npm run build` completes with exit code 0 and exports all static assets into `./out`.
+- [ ] Automated verification script runs and confirms 100% compliance across all SEO and GEO assets.
+- [ ] Changes are committed and pushed to `main` on GitHub, triggering automatic deployment on Cloudflare.
+
+

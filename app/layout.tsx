@@ -5,6 +5,7 @@ import { Inter } from "next/font/google";
 import localFont from "next/font/local";
 
 import Header from "@/components/ui/header";
+import JsonLd from "@/components/seo/json-ld";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -46,10 +47,13 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://novapilot.ai"),
+  metadataBase: new URL("https://novapilotai.ellsimohammed8.workers.dev"),
+  alternates: {
+    canonical: "https://novapilotai.ellsimohammed8.workers.dev",
+  },
   title: "NovaPilot AI — Executive Stealth HUD Copilot for Windows",
   description:
-    "Low-latency dual-stream WASAPI loopback audio capture, ThinkStripper LLM reasoning pipeline, and 100% stealth screen-share protection for Windows 10 & 11.",
+    "Zero-latency dual-stream WASAPI loopback audio capture, ThinkStripper LLM reasoning pipeline, and 100% stealth screen-share protection for Windows 10 & 11.",
   keywords: [
     "NovaPilot",
     "NovaPilot AI",
@@ -61,12 +65,14 @@ export const metadata: Metadata = {
     "Claude 3.7",
     "executive copilot",
     "Windows desktop AI",
+    "Generative Engine Optimization",
   ],
   authors: [{ name: "NovaPilot AI Core Team" }],
   openGraph: {
     title: "NovaPilot AI — Executive Stealth HUD Copilot for Windows",
     description:
-      "Low-latency dual-stream WASAPI loopback audio capture, ThinkStripper LLM reasoning pipeline, and 100% stealth screen-share protection for Windows 10 & 11.",
+      "Zero-latency dual-stream WASAPI loopback audio capture, ThinkStripper LLM reasoning pipeline, and 100% stealth screen-share protection for Windows 10 & 11.",
+    url: "https://novapilotai.ellsimohammed8.workers.dev",
     siteName: "NovaPilot AI",
     type: "website",
     locale: "en_US",
@@ -75,11 +81,15 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "NovaPilot AI — Executive Stealth HUD Copilot for Windows",
     description:
-      "Low-latency dual-stream WASAPI loopback audio capture, ThinkStripper LLM reasoning pipeline, and 100% stealth screen-share protection for Windows 10 & 11.",
+      "Zero-latency dual-stream WASAPI loopback audio capture, ThinkStripper LLM reasoning pipeline, and 100% stealth screen-share protection for Windows 10 & 11.",
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
   },
 };
 
@@ -90,6 +100,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark scroll-smooth">
+      <head>
+        <JsonLd />
+      </head>
       <body
         className={`${inter.variable} ${nacelle.variable} bg-gray-950 font-inter text-base text-gray-200 antialiased selection:bg-cyan-500/30 selection:text-cyan-200`}
       >

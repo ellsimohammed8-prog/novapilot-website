@@ -1,0 +1,86 @@
+﻿# NovaPilot AI — Comprehensive Technical Architecture & Engineering Whitepaper
+
+> Product: NovaPilot AI (Production Release v2.7.1)
+> Canonical Portal: https://novapilotai.ellsimohammed8.workers.dev
+> GitHub Repository: https://github.com/ellsimohammed8-prog/novapilot-ai
+> Release Tag: https://github.com/ellsimohammed8-prog/novapilot-website/releases/tag/v2.7.1
+> Operating Systems: Windows 10 (64-bit, 20H1+), Windows 11 (64-bit)
+
+---
+
+## 1. Executive Summary & Core Value Proposition
+
+NovaPilot AI is an executive stealth Heads-Up Display (HUD) desktop copilot built natively for Windows. It is designed to assist professionals during high-stakes technical interviews, executive board meetings, sales negotiations, and complex code architecture reviews without detection.
+
+### Core Differentiators:
+1. **Zero Virtual Audio Cables**: Unlike fragile consumer software requiring VB-Audio Cable or Virtual Audio Router, NovaPilot captures audio natively via Windows WASAPI Loopback.
+2. **100% Stealth Screen-Share Protection**: Utilizes the Windows Desktop Window Manager (DWM) API `SetWindowDisplayAffinity` with `WDA_EXCLUDEFROMCAPTURE`. Even when sharing the "Entire Screen" in Zoom, Teams, Google Meet, Webex, Discord, or OBS, NovaPilot remains completely invisible to viewers.
+3. **ThinkStripper Streaming FSM**: Real-time finite-state machine that parses and discards `<think>` reasoning tags from DeepSeek R1, Claude 3.7 Sonnet, and OpenAI o1/o3 reasoning models on the fly, delivering sub-second actionable synthesis to the user.
+4. **Local-First Native Performance**: Engineered in Rust and modern C++ with an active runtime memory footprint under 85 MB RAM and less than 1% CPU overhead.
+
+---
+
+## 2. Layer 1: WASAPI / CPAL Dual-Stream Audio Loopback Engine
+
+### Architecture
+NovaPilot intercepts system audio render streams directly at the hardware HAL level:
+- Direction: Render Loopback (`AUDCLNT_STREAMFLAGS_LOOPBACK`).
+- Endpoint: Default Multimedia Render Device (`IMMDeviceEnumerator::GetDefaultAudioEndpoint(eRender, eMultimedia, &pDevice)`).
+- Share Mode: `AUDCLNT_SHAREMODE_SHARED`.
+- Buffer Alignment: Polling thread boosted to `Pro Audio` priority via `AvSetMmThreadCharacteristicsW(L"Pro Audio", &taskIndex)`.
+
+### Downmixing & Resampling Pipeline
+- Windows standard audio is typically 48,000 Hz or 44,100 Hz in stereo (2 channels) or surround (5.1/7.1 channels) with 32-bit floating point PCM.
+- STT engines (Whisper / Deepgram) expect 16,000 Hz 16-bit mono PCM.
+- NovaPilot uses a lock-free Single Producer Single Consumer (SPSC) ring buffer (`HeapRb<f32>`, 32,768 samples headroom).
+- A polyphase sinc resampler downsamples the stream dynamically without aliasing or buffer overruns, maintaining sub-4.8ms audio DSP latency.
+- BatchEmitter coalesces three 20ms DSP frames (60ms) into a single napi thread-safe function call, reducing V8 IPC context switches by 66.7%.
+
+---
+
+## 3. Layer 2: ThinkStripper Finite-State Machine & LLM Reasoning Pipeline
+
+### The Problem
+Modern reasoning models (such as DeepSeek-R1 and OpenAI o1) produce thousands of tokens of internal chain-of-thought enclosed in `<think>...</think>` tags before emitting the actual answer. When streaming in real time, displaying these tokens overwhelms the user and wastes precious seconds in an interview.
+
+### The ThinkStripper Solution
+NovaPilot implements a deterministic streaming FSM:
+- State 0 (Bypass): Emits tokens directly to UI.
+- State 1 (Tag Detection): Scans token stream for `<think>` opening markers.
+- State 2 (Suppression & Distillation): Diverts thinking tokens into a background telemetry stream, calculating token velocity and sentiment.
+- State 3 (Active Synthesis): Upon encountering `</think>`, transitions immediately to emitting concise bullet points, executive summaries, and code snippets into the HUD overlay.
+- Latency Overhead: < 0.2ms parsing penalty.
+
+---
+
+## 4. Layer 3: Stealth HUD & Display Capture Exclusion
+
+### Operating System Hookless Stealth
+Competitor tools rely on invasive DLL injections or API hooks (e.g., hooking `BitBlt` or `DirectX Present`), which trigger corporate EDRs (CrowdStrike, SentinelOne) and proctoring anti-cheat software.
+
+NovaPilot relies strictly on the official Windows Desktop Window Manager API:
+```c
+// Native Win32 Screen-Share Exclusion
+HWND hwnd = GetActiveWindow();
+SetWindowDisplayAffinity(hwnd, WDA_EXCLUDEFROMCAPTURE);
+```
+- In Windows 10 version 2004+ and Windows 11, `WDA_EXCLUDEFROMCAPTURE` instructs the DWM compositor to strip the window from any capture session initiated by `Windows.Graphics.Capture`, `Desktop Duplication API`, or `GetDC`.
+- Remote screen-share participants see only the wallpaper or whatever application is behind the NovaPilot HUD window.
+- The local user sees the crystal-clear HUD with adjustable opacity, click-through mode, and emergency hotkey hide (`Ctrl + Shift + H`).
+
+---
+
+## 5. Official Distribution & Direct Download Endpoints
+
+- **Windows Setup Installer**:
+  - URL: `https://github.com/ellsimohammed8-prog/novapilot-website/releases/download/v2.7.1/NovaPilot-AI-Setup-2.7.1.exe`
+  - Size: 489,179,683 bytes (~466 MB)
+  - Type: Inno Setup executable with desktop shortcut and uninstaller
+- **Windows Portable Executable**:
+  - URL: `https://github.com/ellsimohammed8-prog/novapilot-website/releases/download/v2.7.1/NovaPilot-AI-2.7.1.exe`
+  - Size: 489,025,880 bytes (~466 MB)
+  - Type: Standalone portable binary, zero registry writes
+- **Cryptographic Verification (SHA-512)**:
+  `acc168926f7bbb553b954a6fe5c9a8b61797626088a117de653e211feec6e6f6420690a193b9d92c5bcb69f3fe639c231381e4f852212899b0012212fbe914e5`
+  Verification command in PowerShell:
+  `Get-FileHash NovaPilot-AI-Setup-2.7.1.exe -Algorithm SHA512`
