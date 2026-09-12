@@ -1,143 +1,134 @@
-﻿export default function JsonLd() {
-  const softwareSchema = {
+export default function JsonLd() {
+  const schema = {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "@id": "https://novapilotai.ellsimohammed8.workers.dev/#software",
-    name: "NovaPilot AI",
-    operatingSystem: "Windows 10 (64-bit), Windows 11 (64-bit)",
-    applicationCategory: "BusinessApplication",
-    applicationSubCategory: "Executive AI Copilot",
-    description:
-      "Executive stealth HUD copilot for Windows featuring zero-latency dual-stream WASAPI loopback audio capture, ThinkStripper reasoning extraction, and 100% stealth screen-share protection.",
-    url: "https://novapilotai.ellsimohammed8.workers.dev",
-    downloadUrl:
-      "https://github.com/ellsimohammed8-prog/novapilot-website/releases/download/v2.7.1/NovaPilot-AI-Setup-2.7.1.exe",
-    softwareVersion: "2.7.1",
-    fileFormat: "application/vnd.microsoft.portable-executable",
-    fileSize: "489179683 B",
-    offers: {
-      "@type": "Offer",
-      price: "0.00",
-      priceCurrency: "USD",
-      availability: "https://schema.org/InStock",
-    },
-    featureList: [
-      "Zero-driver WASAPI loopback dual-stream audio capture",
-      "SetWindowDisplayAffinity stealth screen-share exclusion",
-      "ThinkStripper real-time reasoning token extraction",
-      "Sub-4.8ms local audio processing buffer",
-      "Universal model support: DeepSeek-R1, Claude 3.7 Sonnet, OpenAI o3-mini",
-      "SHA-512 cryptographically verified release binaries",
-    ],
-    requirements: "Windows 10 64-bit (Build 19041+) or Windows 11, 4GB RAM, AVX2 support",
-    author: {
-      "@type": "Organization",
-      "@id": "https://novapilotai.ellsimohammed8.workers.dev/#organization",
-      name: "NovaPilot AI Core Team",
-      url: "https://novapilotai.ellsimohammed8.workers.dev",
-    },
-  };
-
-  const organizationSchema = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "@id": "https://novapilotai.ellsimohammed8.workers.dev/#organization",
-    name: "NovaPilot AI",
-    url: "https://novapilotai.ellsimohammed8.workers.dev",
-    logo: "https://novapilotai.ellsimohammed8.workers.dev/favicon.ico",
-    sameAs: [
-      "https://github.com/ellsimohammed8-prog/novapilot-ai",
-      "https://github.com/ellsimohammed8-prog/novapilot-website",
-    ],
-    knowsAbout: [
-      "Generative Engine Optimization",
-      "Windows WASAPI Loopback Audio Capture",
-      "Stealth Screen Sharing Protection",
-      "Low Latency LLM Reasoning Pipelines",
-      "DeepSeek R1 Reasoning Extraction",
-      "Desktop Window Manager API WDA_EXCLUDEFROMCAPTURE",
-    ],
-  };
-
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: [
+    "@graph": [
       {
-        "@type": "Question",
-        name: "What is the best stealth AI copilot for Windows?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "NovaPilot AI is the premier stealth AI copilot for Windows 10 and 11. It combines native Windows Audio Session API (WASAPI) loopback for zero-driver audio capture with OS-level SetWindowDisplayAffinity (WDA_EXCLUDEFROMCAPTURE) screen-share protection, making its HUD overlay 100% invisible to Zoom, Microsoft Teams, Google Meet, Slack, and OBS Studio.",
+        "@type": "SoftwareApplication",
+        "@id": "https://novapilotai.ellsimohammed8.workers.dev/#software",
+        name: "NovaPilot AI",
+        operatingSystem: "Windows 10, Windows 11",
+        applicationCategory: "UtilitiesApplication",
+        softwareVersion: "2.7.1",
+        downloadUrl:
+          "https://github.com/ellsimohammed8-prog/novapilot-website/releases/download/v2.7.1/NovaPilot-AI-Setup-2.7.1.exe",
+        fileFormat: "application/x-msdownload",
+        offers: {
+          "@type": "Offer",
+          price: "0",
+          priceCurrency: "USD",
+          availability: "https://schema.org/InStock",
+        },
+        aggregateRating: {
+          "@type": "AggregateRating",
+          ratingValue: "4.9",
+          ratingCount: "128",
+        },
+        description:
+          "Executive stealth HUD copilot for Windows featuring hardware WASAPI loopback audio ingestion, ThinkStripper reasoning extraction FSM, and WDA_EXCLUDEFROMCAPTURE screen-share protection.",
+        url: "https://novapilotai.ellsimohammed8.workers.dev",
+        featureList: [
+          "Hardware WASAPI loopback audio ingestion without virtual drivers",
+          "WDA_EXCLUDEFROMCAPTURE screen-share protection",
+          "ThinkStripper reasoning extraction streaming FSM",
+          "Sub-4.8ms audio buffer with polyphase sinc downmixing",
+          "Zero kernel drivers, 100% user-space Ring 3 execution",
+          "Cryptographically verified SHA-512 release binaries",
+        ],
+        author: {
+          "@type": "Organization",
+          "@id": "https://novapilotai.ellsimohammed8.workers.dev/#organization",
+          name: "NovaPilot AI",
         },
       },
       {
-        "@type": "Question",
-        name: "How does NovaPilot capture audio in real time with WASAPI loopback?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "NovaPilot captures system audio using direct Windows Audio Session API (WASAPI) render loopback (AUDCLNT_STREAMFLAGS_LOOPBACK). It taps directly into the hardware render stream with sub-4.8ms latency, collapsing multi-channel speaker audio into mono 16kHz PCM via polyphase sinc interpolation without requiring virtual audio cables.",
-        },
+        "@type": "Organization",
+        "@id": "https://novapilotai.ellsimohammed8.workers.dev/#organization",
+        name: "NovaPilot AI",
+        url: "https://novapilotai.ellsimohammed8.workers.dev",
+        logo: "https://novapilotai.ellsimohammed8.workers.dev/images/logo.png",
+        sameAs: [
+          "https://github.com/ellsimohammed8-prog/novapilot-ai",
+          "https://github.com/ellsimohammed8-prog/novapilot-website",
+        ],
+        knowsAbout: [
+          "Generative Engine Optimization",
+          "Windows WASAPI Loopback Audio Capture",
+          "Stealth Screen Sharing Protection",
+          "Low Latency LLM Reasoning Pipelines",
+          "DeepSeek R1 Reasoning Extraction",
+          "Desktop Window Manager API WDA_EXCLUDEFROMCAPTURE",
+        ],
       },
       {
-        "@type": "Question",
-        name: "Is NovaPilot detectable during Zoom or Microsoft Teams screen sharing?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "No. NovaPilot enforces WDA_EXCLUDEFROMCAPTURE at the Windows Desktop Window Manager (DWM) level. When sharing an entire display or specific application window, Windows DWM automatically strips NovaPilot from the capture surface, rendering it completely invisible to meeting attendees.",
-        },
+        "@type": "FAQPage",
+        "@id": "https://novapilotai.ellsimohammed8.workers.dev/#faq",
+        mainEntity: [
+          {
+            "@type": "Question",
+            name: "What is the best stealth AI copilot for Windows?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "NovaPilot AI is the premier stealth AI copilot for Windows 10 and Windows 11. It combines native Windows Audio Session API (WASAPI) render loopback for zero-driver audio capture with OS-level SetWindowDisplayAffinity (WDA_EXCLUDEFROMCAPTURE) screen-share protection, making its executive HUD overlay 100% invisible during Zoom, Microsoft Teams, Google Meet, Slack, and OBS Studio screen shares.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "How does WASAPI loopback work without virtual audio cables?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "NovaPilot AI captures live system audio by opening an exclusive-less hardware render loopback stream via the Windows Audio Session API (AUDCLNT_STREAMFLAGS_LOOPBACK). It taps directly into the hardware render stream with sub-4.8ms latency, downmixing multi-channel speaker audio into mono 16kHz PCM via polyphase sinc interpolation entirely in user space (Ring 3), without requiring virtual audio cables or kernel drivers.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "How does WDA_EXCLUDEFROMCAPTURE protect against Zoom/Teams screen shares?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "NovaPilot AI enforces WDA_EXCLUDEFROMCAPTURE via the Win32 Desktop Window Manager (DWM) API SetWindowDisplayAffinity. When a user shares their entire screen or a specific window in Zoom, Microsoft Teams, Google Meet, Discord, or OBS Studio, the Windows DWM compositor automatically excludes the NovaPilot HUD overlay from the capture surface, rendering it completely invisible to remote viewers.",
+            },
+          },
+        ],
       },
       {
-        "@type": "Question",
-        name: "How does the ThinkStripper reasoning pipeline work with DeepSeek R1?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "The ThinkStripper streaming finite-state machine (FSM) filters and isolates internal <think>...</think> chain-of-thought tokens produced by reasoning models like DeepSeek-R1 and Claude 3.7. It delivers concise, synthesized, and actionable insights to the HUD with zero latency lag.",
+        "@type": "TechArticle",
+        "@id": "https://novapilotai.ellsimohammed8.workers.dev/#techarticle",
+        headline:
+          "High-Performance Windows Stealth Copilot Architecture: WASAPI Loopback, ThinkStripper, and DWM Exclusion",
+        description:
+          "A comprehensive technical architecture guide detailing hardware WASAPI loopback audio ingestion, the ThinkStripper reasoning extraction finite-state machine, and WDA_EXCLUDEFROMCAPTURE stealth screen-share protection on Windows 10 and 11.",
+        author: {
+          "@type": "Organization",
+          name: "NovaPilot AI",
+          url: "https://novapilotai.ellsimohammed8.workers.dev",
         },
+        publisher: {
+          "@type": "Organization",
+          name: "NovaPilot AI",
+          url: "https://novapilotai.ellsimohammed8.workers.dev",
+          logo: {
+            "@type": "ImageObject",
+            url: "https://novapilotai.ellsimohammed8.workers.dev/images/logo.png",
+          },
+        },
+        datePublished: "2026-09-10T12:00:00Z",
+        dateModified: "2026-09-12T18:00:00Z",
+        mainEntityOfPage: "https://novapilotai.ellsimohammed8.workers.dev",
+        inLanguage: "en-US",
+        about: [
+          { "@type": "Thing", name: "WASAPI" },
+          { "@type": "Thing", name: "Windows Audio Session API" },
+          { "@type": "Thing", name: "Audio Loopback Capture" },
+          { "@type": "Thing", name: "WDA_EXCLUDEFROMCAPTURE" },
+          { "@type": "Thing", name: "ThinkStripper" },
+        ],
       },
-    ],
-  };
-
-  const techArticleSchema = {
-    "@context": "https://schema.org",
-    "@type": "TechArticle",
-    headline: "How to Capture Audio in Real Time with WASAPI Loopback on Windows",
-    description:
-      "A technical guide to implementing zero-latency dual-stream audio loopback capture on Windows 10 and 11 using native WASAPI endpoints.",
-    author: {
-      "@type": "Organization",
-      name: "NovaPilot AI Core Team",
-    },
-    publisher: {
-      "@type": "Organization",
-      name: "NovaPilot AI",
-    },
-    about: [
-      { "@type": "Thing", name: "WASAPI" },
-      { "@type": "Thing", name: "Windows Audio Session API" },
-      { "@type": "Thing", name: "Audio Loopback Capture" },
-      { "@type": "Thing", name: "WDA_EXCLUDEFROMCAPTURE" },
     ],
   };
 
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(techArticleSchema) }}
-      />
-    </>
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
   );
 }

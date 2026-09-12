@@ -1,5 +1,5 @@
-﻿# robots.txt for NovaPilot AI
-# https://novapilotai.ellsimohammed8.workers.dev
+# robots.txt for NovaPilot AI
+# Canonical Domain: https://novapilotai.ellsimohammed8.workers.dev
 
 User-agent: *
 Allow: /
@@ -9,44 +9,68 @@ Disallow: /_next/
 # OpenAI SearchGPT & ChatGPT Crawler Directives
 User-agent: OAI-SearchBot
 Allow: /
+Disallow: /api/
+Disallow: /_next/
 
 User-agent: ChatGPT-User
 Allow: /
+Disallow: /api/
+Disallow: /_next/
 
 User-agent: GPTBot
 Allow: /
+Disallow: /api/
+Disallow: /_next/
 
 # Perplexity AI Search Crawler Directives
 User-agent: PerplexityBot
 Allow: /
+Disallow: /api/
+Disallow: /_next/
 
 User-agent: Perplexity-User
 Allow: /
+Disallow: /api/
+Disallow: /_next/
 
 # Anthropic Claude Crawler Directives
 User-agent: ClaudeBot
 Allow: /
+Disallow: /api/
+Disallow: /_next/
 
 User-agent: Claude-Web
 Allow: /
+Disallow: /api/
+Disallow: /_next/
 
 # Google Search & Google-Extended (Gemini / AI Overviews)
 User-agent: Googlebot
 Allow: /
+Disallow: /api/
+Disallow: /_next/
 
 User-agent: Google-Extended
 Allow: /
+Disallow: /api/
+Disallow: /_next/
 
 # Microsoft Bing & Copilot
 User-agent: Bingbot
 Allow: /
+Disallow: /api/
+Disallow: /_next/
 
-# Apple Intelligence
+# Apple Intelligence & Search
 User-agent: Applebot
 Allow: /
+Disallow: /api/
+Disallow: /_next/
 
 User-agent: Applebot-Extended
 Allow: /
+Disallow: /api/
+Disallow: /_next/
 
-# Canonical Sitemap
+# Canonical Sitemap Declaration
 Sitemap: https://novapilotai.ellsimohammed8.workers.dev/sitemap.xml

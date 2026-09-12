@@ -71,9 +71,17 @@ export const metadata: Metadata = {
   openGraph: {
     title: "NovaPilot AI — Executive Stealth HUD Copilot for Windows",
     description:
-      "Zero-latency dual-stream WASAPI loopback audio capture, ThinkStripper LLM reasoning pipeline, and 100% stealth screen-share protection for Windows 10 & 11.",
+      "Executive stealth HUD copilot for Windows featuring hardware WASAPI loopback audio ingestion, ThinkStripper reasoning extraction FSM, and WDA_EXCLUDEFROMCAPTURE screen-share protection.",
     url: "https://novapilotai.ellsimohammed8.workers.dev",
     siteName: "NovaPilot AI",
+    images: [
+      {
+        url: "/images/hero-dormant-blueprint.jpg",
+        width: 1200,
+        height: 630,
+        alt: "NovaPilot AI — Executive Stealth HUD Copilot for Windows",
+      },
+    ],
     type: "website",
     locale: "en_US",
   },
@@ -81,7 +89,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "NovaPilot AI — Executive Stealth HUD Copilot for Windows",
     description:
-      "Zero-latency dual-stream WASAPI loopback audio capture, ThinkStripper LLM reasoning pipeline, and 100% stealth screen-share protection for Windows 10 & 11.",
+      "Executive stealth HUD copilot for Windows featuring hardware WASAPI loopback audio ingestion, ThinkStripper reasoning extraction FSM, and WDA_EXCLUDEFROMCAPTURE screen-share protection.",
+    images: ["/images/hero-dormant-blueprint.jpg"],
   },
   robots: {
     index: true,
@@ -90,6 +99,9 @@ export const metadata: Metadata = {
       index: true,
       follow: true,
     },
+  },
+  verification: {
+    google: "googlefa1396fe74947b67",
   },
 };
 

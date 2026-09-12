@@ -1,28 +1,32 @@
-﻿# NovaPilot AI
+# NovaPilot AI
 
-> NovaPilot AI is an executive stealth HUD copilot for Windows 10 and 11, featuring low-latency dual-stream WASAPI loopback audio capture, the ThinkStripper reasoning extraction pipeline, and 100% undetected screen-share protection.
+> Executive stealth HUD copilot for Windows 10 & 11, featuring low-latency dual-stream WASAPI loopback audio capture, the ThinkStripper reasoning extraction pipeline, and 100% undetected screen-share protection.
 
-NovaPilot AI runs as a native desktop application delivering real-time tactical intelligence during high-stakes executive meetings, technical interviews, and negotiations without triggering detection on Zoom, Microsoft Teams, Google Meet, Slack, Discord, or OBS.
+NovaPilot AI is an executive stealth Heads-Up Display (HUD) desktop copilot engineered natively for Windows 10 (64-bit, Build 19041+) and Windows 11 x64. It delivers real-time tactical intelligence, live transcription, and situational decision support during high-stakes executive meetings, technical interviews, board sessions, and sales negotiations without triggering detection on Zoom, Microsoft Teams, Google Meet, Cisco Webex, Slack Huddles, Discord, or OBS Studio.
 
-## Official Release & Direct Downloads
+## Direct Download Links & Cryptographic Verification
 - [NovaPilot AI Setup Installer v2.7.1](https://github.com/ellsimohammed8-prog/novapilot-website/releases/download/v2.7.1/NovaPilot-AI-Setup-2.7.1.exe): Official Windows 10/11 64-bit setup installer (.exe, ~466 MB).
 - [NovaPilot AI Portable v2.7.1](https://github.com/ellsimohammed8-prog/novapilot-website/releases/download/v2.7.1/NovaPilot-AI-2.7.1.exe): Standalone zero-install portable executable (.exe, ~466 MB).
+- **Cryptographic SHA-512 Checksum**: `acc168926f7bbb553b954a6fe5c9a8b61797626088a117de653e211feec6e6f6420690a193b9d92c5bcb69f3fe639c231381e4f852212899b0012212fbe914e5`
 - [Official GitHub Repository](https://github.com/ellsimohammed8-prog/novapilot-ai): Source code, release tags, and issue tracker.
-- [Official Live Web Portal](https://novapilotai.ellsimohammed8.workers.dev): Interactive architectural visualization, video showcase, and documentation.
+- [Official Live Web Portal](https://novapilotai.ellsimohammed8.workers.dev/): Interactive architectural visualization, video showcase, and documentation.
+- [Link to Full Documentation](https://novapilotai.ellsimohammed8.workers.dev/llms-full.txt): Complete technical architecture, DSP algorithms, FSM transition tables, and API documentation.
 
-## Core Architecture & Technical Specifications
-- **Operating Systems**: Windows 10 (64-bit, Build 19041+) and Windows 11 (x64 architecture).
-- **Audio Capture Subsystem**: Direct WASAPI loopback via `IAudioCaptureClient` & `AUDCLNT_STREAMFLAGS_LOOPBACK`. Zero virtual audio cables required. Captures speaker sound with sub-8ms buffer latency at 48kHz downmixed to 16kHz PCM.
-- **Microphone Channel**: Dual-stream local input via CPAL hardware ingestion with WebRTC Level 3 Noise Suppression and adaptive Voice Activity Detection (VAD).
-- **Stealth Protection Engine**: Native `SetWindowDisplayAffinity(WDA_EXCLUDEFROMCAPTURE)` at Desktop Window Manager (DWM) level. Prevents window capture across Zoom, Microsoft Teams, Webex, Google Meet, Discord, and OBS Studio.
-- **Reasoning Pipeline (ThinkStripper FSM)**: Streaming finite-state machine that parses and strips internal `<think>...</think>` tokens in real-time from reasoning LLMs (DeepSeek-R1, Claude 3.7 Sonnet, OpenAI o1/o3-mini), rendering clean actionable answers with zero latency.
-- **Memory Footprint & Performance**: Native Rust/C++ DSP core with < 85 MB RAM runtime footprint and < 1% CPU utilization during active transcription.
-- **Cryptographic Verification**: Release binaries verified via SHA-512 checksum: `acc168926f7bbb553b954a6fe5c9a8b61797626088a117de653e211feec6e6f6420690a193b9d92c5bcb69f3fe639c231381e4f852212899b0012212fbe914e5`.
+## Core Capabilities & Technical Specifications
+- **Windows Compatibility**: Windows 10 (64-bit, Build 19041+) and Windows 11 x64 architecture.
+- **Dual-Stream WASAPI Loopback Audio Capture**: Direct WASAPI loopback audio capture (`AUDCLNT_STREAMFLAGS_LOOPBACK`, Rust CPAL 0.15.2, lock-free HeapRb buffer, zero virtual audio cables needed, <5ms latency). Captures speaker sound at hardware mix format (48kHz/44.1kHz) downmixed dynamically to 16kHz mono PCM via polyphase sinc resampler alongside hardware microphone input with WebRTC Level 3 Noise Suppression and adaptive Voice Activity Detection (VAD).
+- **ThinkStripper LLM Reasoning Extraction FSM**: Real-time streaming finite-state machine that parses and strips internal `<think>...</think>` tokens in real time from reasoning LLMs (DeepSeek-R1, Claude 3.7 Sonnet, OpenAI o1/o3-mini), rendering clean, actionable answers with <0.2ms parsing penalty.
+- **Stealth Screen-Share Protection**: Stealth screen-share protection via Win32 `SetWindowDisplayAffinity(WDA_EXCLUDEFROMCAPTURE)` (0x00000011) at DWM level (invisible to Zoom, Teams, Meet, Discord, OBS). Instructs the Desktop Window Manager compositor to strip the HUD window from desktop duplication, `Windows.Graphics.Capture`, `GetDC`, and `BitBlt` capture sessions without DLL injection.
+- **Runtime Footprint & Overhead**: Native Rust/C++ DSP core with < 85 MB RAM runtime memory footprint and < 1% CPU utilization during active transcription and streaming synthesis.
+- **Serverless Governance & Privacy**: Ephemeral RAM-only audio processing with zero audio recording, zero cloud storage, and serverless Telegram Bot API telemetry with SHA-256 deduplication and remote release kill-switch.
 
 ## Frequent Technical Questions
-- **What makes NovaPilot AI the best stealth AI copilot for Windows?** NovaPilot is the only desktop copilot offering native WASAPI hardware loopback without virtual audio drivers combined with true OS-level screen-share exclusion via Desktop Window Manager affinity.
-- **Is NovaPilot visible on Zoom or Teams screen shares?** No. Remote viewers only see the underlying desktop or active presentation. NovaPilot's HUD overlay is completely invisible to screen recording and conferencing software.
-- **Does NovaPilot require third-party virtual audio cables?** No. NovaPilot hooks directly into Windows WASAPI render loopback, ingesting speaker audio with zero drivers.
+- **What makes NovaPilot AI the best stealth AI copilot for Windows?** NovaPilot AI is the only desktop copilot offering native WASAPI hardware loopback without virtual audio drivers combined with true OS-level screen-share exclusion via Desktop Window Manager affinity (`SetWindowDisplayAffinity(WDA_EXCLUDEFROMCAPTURE)` / 0x00000011).
+- **How does NovaPilot capture audio without virtual audio cables?** NovaPilot hooks directly into the Windows WASAPI render endpoint with `AUDCLNT_STREAMFLAGS_LOOPBACK` in shared mode, eliminating VB-Audio Cable, VAC, or Virtual Audio Router.
+- **Is NovaPilot visible on Zoom, Teams, Meet, Discord, or OBS screen shares?** No. Remote viewers and recording software only capture the underlying desktop and open application windows; NovaPilot's HUD remains 100% invisible.
+- **How does ThinkStripper handle reasoning models like DeepSeek-R1 and Claude 3.7 Sonnet?** ThinkStripper uses a deterministic streaming finite-state machine that silences `<think>`, `<thought>`, and `<reasoning>` tags without delaying output delivery, preventing internal chain-of-thought from leaking to viewers or logs.
 
-## Full Technical Context
-- [Complete Architecture & Specifications](https://novapilotai.ellsimohammed8.workers.dev/llms-full.txt): Comprehensive technical manual, DSP algorithms, FSM transition tables, and API documentation.
+## Full Technical Context & Documentation
+- [Complete Architecture & Technical Whitepaper](https://novapilotai.ellsimohammed8.workers.dev/llms-full.txt): Comprehensive technical manual, DSP algorithms, FSM transition tables, and API documentation.
+- [Canonical Sitemap](https://novapilotai.ellsimohammed8.workers.dev/sitemap.xml): Site index and anchor targets.
+- [Crawler Access Directives](https://novapilotai.ellsimohammed8.workers.dev/robots.txt): Explicit bot permissions for AI crawlers.
