@@ -58,6 +58,12 @@ const securityHeaders = [
 ];
 
 const nextConfig = {
+  // Static HTML export for Cloudflare Pages global edge CDN
+  output: 'export',
+  images: {
+    unoptimized: true,
+  },
+
   // Strip X-Powered-By: Next.js header to prevent framework fingerprinting
   poweredByHeader: false,
 
