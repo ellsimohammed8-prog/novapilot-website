@@ -73,13 +73,14 @@ export default function DownloadButton({
         target={linkTarget}
         rel={linkRel}
         onClick={onClick}
+        suppressHydrationWarning
         className={`group inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] rounded-xl text-xs font-semibold text-[#FFFFFF] bg-[#0047AB] hover:bg-[#1D4ED8] border border-[#1D4ED8]/60 shadow-[0_0_16px_rgba(0,71,171,0.25)] transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-[#3B82F6] focus-visible:outline-hidden ${className}`}
         aria-label={`${displayLabel} ${versionTag} installer (${installerSlug})`}
       >
         <WindowsIcon className="w-3.5 h-3.5 fill-current text-[#FFFFFF] shrink-0" />
-        <span className="font-semibold text-[#FFFFFF] tracking-tight">{displayLabel}</span>
+        <span suppressHydrationWarning className="font-semibold text-[#FFFFFF] tracking-tight">{displayLabel}</span>
         {showPlatform && isHydrated && !isWindows && (
-          <span className="text-[10px] font-mono text-amber-200 bg-amber-950/70 border border-amber-500/30 px-1 py-0.5 rounded">
+          <span suppressHydrationWarning className="text-[10px] font-mono text-amber-200 bg-amber-950/70 border border-amber-500/30 px-1 py-0.5 rounded">
             {platformLabel}
           </span>
         )}
@@ -99,13 +100,14 @@ export default function DownloadButton({
         target={linkTarget}
         rel={linkRel}
         onClick={onClick}
+        suppressHydrationWarning
         className={`group inline-flex items-center justify-center gap-2.5 px-5 py-3 min-h-[44px] rounded-xl text-sm font-medium text-[#FFFFFF] bg-[#111827] hover:bg-[#1E293B] border border-white/10 hover:border-white/20 transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-[#3B82F6] focus-visible:outline-hidden ${className}`}
         aria-label={`${displayLabel} ${versionTag} installer (${installerSlug})`}
       >
         <WindowsIcon className="w-4 h-4 fill-current text-blue-400 group-hover:text-blue-300 transition-colors shrink-0" />
-        <span className="font-medium text-[#FFFFFF]">{displayLabel}</span>
+        <span suppressHydrationWarning className="font-medium text-[#FFFFFF]">{displayLabel}</span>
         {showPlatform && isHydrated && !isWindows && (
-          <span className="text-xs font-mono text-amber-300 bg-amber-950/60 border border-amber-500/30 px-1.5 py-0.5 rounded">
+          <span suppressHydrationWarning className="text-xs font-mono text-amber-300 bg-amber-950/60 border border-amber-500/30 px-1.5 py-0.5 rounded">
             {platformLabel}
           </span>
         )}
@@ -118,35 +120,28 @@ export default function DownloadButton({
     );
   }
 
-  // Primary variant (Deep Cobalt #0047AB / #1D4ED8 + Pure White #FFFFFF)
   return (
     <Link
       href={href}
       target={linkTarget}
       rel={linkRel}
       onClick={onClick}
-      className={`group relative inline-flex items-center justify-center gap-3 px-6 py-3.5 min-h-[44px] rounded-xl text-sm font-semibold text-[#FFFFFF] bg-[#0047AB] hover:bg-[#1D4ED8] border border-[#1D4ED8]/80 shadow-[0_0_24px_rgba(0,71,171,0.35)] hover:shadow-[0_0_32px_rgba(29,78,216,0.5)] transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-[#3B82F6] focus-visible:outline-hidden ${className}`}
+      suppressHydrationWarning
+      className={`group relative inline-flex items-center justify-center gap-3 px-6 py-3.5 min-h-[44px] rounded-xl text-sm font-semibold text-[#FFFFFF] bg-[#0047AB] hover:bg-[#1D4ED8] border border-[#1D4ED8] shadow-[0_0_24px_rgba(0,71,171,0.35)] transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-[#3B82F6] focus-visible:outline-hidden ${className}`}
       aria-label={`${displayLabel} ${versionTag} installer (${installerSlug})`}
     >
       <WindowsIcon className="w-4 h-4 fill-current text-[#FFFFFF] shrink-0" />
-      <span className="font-semibold text-[#FFFFFF] tracking-tight">
-        {displayLabel}
-      </span>
-      <div className="flex items-center gap-1.5">
-        <span className="text-[11px] font-mono font-medium px-1.5 py-0.5 rounded bg-[#002D62] text-blue-200 border border-blue-400/30">
-          .exe
+      <span suppressHydrationWarning className="font-bold text-[#FFFFFF] tracking-tight">{displayLabel}</span>
+      {showPlatform && isHydrated && !isWindows && (
+        <span suppressHydrationWarning className="text-xs font-mono text-amber-200 bg-amber-950/70 border border-amber-500/30 px-1.5 py-0.5 rounded">
+          {platformLabel}
         </span>
-        {showPlatform && isHydrated && !isWindows && (
-          <span className="text-[11px] font-mono px-1.5 py-0.5 rounded bg-amber-950/80 text-amber-200 border border-amber-500/30">
-            {platformLabel}
-          </span>
-        )}
-        {showVersion && (
-          <span className="text-[11px] font-mono text-blue-100/90">
-            {versionTag}
-          </span>
-        )}
-      </div>
+      )}
+      {showVersion && (
+        <span className="text-xs font-mono text-blue-100 bg-[#003A8C]/80 px-2 py-0.5 rounded border border-blue-400/20">
+          {versionTag}
+        </span>
+      )}
     </Link>
   );
 }

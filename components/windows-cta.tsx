@@ -24,7 +24,9 @@ export default function WindowsCta() {
     "acc168926f7bbb553b954a6fe5c9a8b61797626088a117de653e211feec6e6f6420690a193b9d92c5bcb69f3fe639c231381e4f852212899b0012212fbe914e5";
 
   const handleCopyHash = () => {
-    navigator.clipboard.writeText(sha512Hash);
+    if (typeof navigator !== "undefined" && navigator.clipboard) {
+      navigator.clipboard.writeText(sha512Hash).catch(() => {});
+    }
     setCopiedSha(true);
     setTimeout(() => setCopiedSha(false), 2500);
   };
@@ -69,7 +71,7 @@ export default function WindowsCta() {
 
             {/* Platform detection advisory if on non-Windows */}
             {isHydrated && !isWindows && (
-              <div className="mt-4 inline-flex items-center gap-2 px-4 py-1.5 rounded-xl border border-amber-500/30 bg-amber-950/30 text-xs font-mono text-amber-200">
+              <div suppressHydrationWarning className="mt-4 inline-flex items-center gap-2 px-4 py-1.5 rounded-xl border border-amber-500/30 bg-amber-950/30 text-xs font-mono text-amber-200">
                 <span>Notice: {os === "mac" ? "macOS" : os === "linux" ? "Linux" : "Non-Windows"} browser detected. This installer is built for Windows 10 &amp; 11 (x64).</span>
               </div>
             )}

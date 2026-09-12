@@ -214,16 +214,22 @@ export default function InteractiveArchitecture() {
     camera.position.set(0, 14, 28);
     camera.lookAt(0, 0, 0);
 
-    // High performance antialiased WebGL renderer
-    const renderer = new THREE.WebGLRenderer({
-      canvas,
-      alpha: true,
-      antialias: true,
-      powerPreference: "high-performance",
-    });
-    rendererRef.current = renderer;
-    renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    // High performance antialiased WebGL renderer with safe fallback
+    let renderer: THREE.WebGLRenderer | null = null;
+    try {
+      renderer = new THREE.WebGLRenderer({
+        canvas,
+        alpha: true,
+        antialias: true,
+        powerPreference: "high-performance",
+      });
+      rendererRef.current = renderer;
+      renderer.setSize(width, height);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    } catch (err) {
+      console.warn("WebGL not supported or disabled in this environment:", err);
+      return;
+    }
 
     // Ambient & Directional Lighting
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.9);
@@ -391,7 +397,9 @@ export default function InteractiveArchitecture() {
         layerPlanes[1].position.y = 0 + Math.cos(elapsed * 1.5) * 0.15;
         layerPlanes[2].position.y = 5 + Math.sin(elapsed * 1.5 + 1.0) * 0.15;
 
-        renderer.render(scene, camera);
+        if (renderer) {
+          renderer.render(scene, camera);
+        }
       }
       animFrameRef.current = requestAnimationFrame(animate);
     };
@@ -415,7 +423,7 @@ export default function InteractiveArchitecture() {
       packetGeo.dispose();
       packetMatEmerald.dispose();
       packetMatCyan.dispose();
-      renderer.dispose();
+      renderer?.dispose();
     };
   }, []);
 

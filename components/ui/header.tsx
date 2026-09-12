@@ -25,13 +25,13 @@ export default function Header() {
           {/* Brand Logo & Version / OS Status Tag */}
           <div className="flex items-center gap-3">
             <Logo />
-            <div className="hidden sm:inline-flex items-center gap-2">
+            <div suppressHydrationWarning className="hidden sm:inline-flex items-center gap-2">
               <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-mono border border-emerald-500/30 bg-emerald-950/40 text-emerald-400">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                 v2.7.1-production
               </span>
               {isHydrated && !isWindows && (
-                <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-mono border border-amber-500/30 bg-amber-950/40 text-amber-300">
+                <span suppressHydrationWarning className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-mono border border-amber-500/30 bg-amber-950/40 text-amber-300">
                   {os === "mac" ? "macOS detected" : os === "linux" ? "Linux detected" : "Cross-platform"}
                 </span>
               )}
@@ -98,13 +98,13 @@ export default function Header() {
         {/* Mobile Navigation Dropdown */}
         {mobileMenuOpen && (
           <div className="md:hidden py-4 border-t border-[rgba(255,255,255,0.08)] bg-[#0B0F19]/95 space-y-2">
-            <div className="flex items-center px-3 py-1 mb-2 gap-2">
+            <div suppressHydrationWarning className="flex items-center px-3 py-1 mb-2 gap-2">
               <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs font-mono border border-emerald-500/30 bg-emerald-950/40 text-emerald-400">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                 v2.7.1-production
               </span>
               {isHydrated && !isWindows && (
-                <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-mono border border-amber-500/30 bg-amber-950/40 text-amber-300">
+                <span suppressHydrationWarning className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-mono border border-amber-500/30 bg-amber-950/40 text-amber-300">
                   {os === "mac" ? "macOS detected" : os === "linux" ? "Linux detected" : "Cross-platform"}
                 </span>
               )}
