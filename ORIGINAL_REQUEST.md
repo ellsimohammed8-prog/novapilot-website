@@ -158,4 +158,99 @@ Create automated programmatic test scripts to validate the syntax and presence o
 - [ ] Automated verification script runs and confirms 100% compliance across all SEO and GEO assets.
 - [ ] Changes are committed and pushed to `main` on GitHub, triggering automatic deployment on Cloudflare.
 
+## 2026-09-17T22:38:15Z
+
+Refactor the NovaPilot AI landing page to replace dense architectural schematics and blueprint clutter with a cinematic Three.js scrollytelling background and clean glassmorphism layout, while preserving core hero messaging, the 4 key feature badges, and the interactive video showcase.
+
+Working directory: c:\Users\WINDOWS 11\Desktop\WEB
+Integrity mode: demo
+
+## Requirements
+
+### R1. Content Simplification & Core Preservation
+- Retain the complete navigation bar: brand logo, version badge (`v2.7.1-production`), and Windows download action buttons.
+- Retain the primary Hero section: headline ("The Executive HUD Copilot for High-Stakes Remote Calls"), subheadline, and primary download CTA button.
+- Retain the 4 foundational technical feature badges: "WASAPI Loopback (<5ms)", "Screen-Share Proof (100% Invisible)", "DeepSeek & Claude (ThinkStripper FSM)", and "Local-First Privacy (Zero Cloud Storage)".
+- Retain and cleanly frame the product video showcase player so it integrates into the 3D viewport.
+- Remove dense blueprint schematics, raw coordinate diagrams, and complex technical schematics under the "16:9 DUAL-STATE ARCHITECTURE VIEWPORT" and excessive architectural noise.
+
+### R2. Cinematic Three.js Scrollytelling Background
+- Integrate a full-screen fixed background canvas (`z-index: 0` / background layer, `pointer-events: none`).
+- Implement the procedural 6,500-particle system with scroll-driven camera waypoints:
+  - Phase 1 (Hero): Concentrated glowing Nova core responding to cursor parallax.
+  - Phase 2 (Features): Radial particle burst framing the 4 key technical badges.
+  - Phase 3 (Video): Particle accretion ring enveloping the holographic video showcase frame.
+  - Phase 4 (Download/CTA): Cinematic upward camera tilt focusing on the Windows Download call-to-action.
+- Smooth mouse parallax and inertia lerping across all phases without blocking scroll or UI events.
+
+### R3. Visual Styling & Polish
+- Apply dark glassmorphism styling to content cards (`backdrop-filter: blur(16px); background: rgba(10, 15, 28, 0.5); border: 1px solid rgba(0, 212, 255, 0.15)`).
+- Ensure 60 FPS performance, responsive viewport scaling on resize, and clean WebGL resource disposal.
+
+## Acceptance Criteria
+
+### Build & Integrity
+- [ ] `npm run build` completes successfully with 0 TypeScript or lint errors.
+- [ ] No dangling imports or runtime reference errors following the removal of blueprint/schematic components.
+
+### UI & Layout Alignment
+- [ ] The full navbar (logo, version badge `v2.7.1-production`, download buttons) remains intact and functional.
+- [ ] The Hero headline, subheadline, and download CTA are displayed prominently.
+- [ ] The 4 key feature badges ("WASAPI Loopback", "Screen-Share Proof", "DeepSeek & Claude", "Local-First Privacy") are cleanly visible with dark glassmorphism styling.
+- [ ] The dense blueprint and schematic diagrams are removed from the main landing page flow.
+- [ ] The video showcase component is preserved, cleanly framed, and operational.
+
+### 3D Scrollytelling Experience
+- [ ] A fixed full-screen Three.js background canvas renders behind the HTML content without blocking clicks or selections (`pointer-events: none`).
+- [ ] Scrolling down smoothly transitions the particle system and camera between Hero core, feature explosion, video accretion ring, and download perspective.
+- [ ] Mouse parallax smoothly responds to cursor movement across the viewport.
+- [ ] Resize events dynamically adjust camera aspect ratio and renderer size without stretching or clipping.
+
+## 2026-09-18T12:25:32Z
+
+Architect an authentic 3D spatial scrollytelling experience for NovaPilot AI. Transition from a flat "background canvas behind static text" to genuine 3D spatial depth where the camera flies through space, the hero text recedes backward in the Z-axis, the 16:9 video showcase docks seamlessly into the 3D accretion ring, interactive 3D cursor effects react to user input, and excessive technical clutter is pruned for maximum download conversions.
+
+Working directory: c:\Users\WINDOWS 11\Desktop\WEB
+Integrity mode: demo
+
+## Requirements
+
+### R1. True 3D Spatial Scrollytelling & Text Z-Axis Choreography
+- Replace static HTML overlays with true 3D spatial depth:
+  - **Scroll Progression**: As the user scrolls down, the Hero headline and subtitle physically recede backward into depth (`translateZ` fly-through / scale-down / spatial dispersion) as the 3D camera flies forward through the starfield.
+  - **Phase 2 (Features)**: The 4 key feature cards glide into the 3D viewport from the periphery, framing the expanding 3D cosmic particle field.
+  - **Phase 3 (Video Portal)**: The 16:9 Video Showcase docks into the 3D holographic wireframe, enveloped by the rotating 3D particle accretion ring.
+  - **Interactive 3D Cursor**: Implement an elegant, lightweight glowing cyan cursor follower / particle trail reacting smoothly to mouse velocity and hover states.
+
+### R2. Content Simplification & High-Conversion Marketing Polish
+- Eliminate dense technical essays, redundant specification matrices, and walls of text that make the page feel heavy and cluttered.
+- Condense the landing page flow to high-impact marketing sections:
+  1. Hero Hook & Instant Windows Download CTA.
+  2. 4 Sleek Floating Glassmorphic Badges (WASAPI <5ms, 100% Invisible, ThinkStripper FSM, Zero Cloud Storage).
+  3. Cinematic 16:9 Video Showcase with holographic HUD framing.
+  4. Concise FAQ / Trust Badges.
+  5. High-Conversion Windows Download Portal.
+- Re-anchor the "3D Architecture" link in the top navigation bar to smoothly scroll to the 3D Live Demo section (`#demo`), ensuring all navbar links are functional.
+
+### R3. Performance, Accessibility & Clean WebGL Lifecycle
+- Guarantee smooth 60 FPS performance across desktop and mobile devices.
+- Ensure all interactive buttons, video controls, and download links remain 100% accessible and responsive.
+- Clean WebGL resource disposal and event listener teardown on unmount to prevent memory leaks.
+
+## Acceptance Criteria
+
+### 3D Spatial Experience & Interactive Depth
+- [ ] Scrolling down produces visible 3D z-axis depth movement (Hero text recedes backward and parts as the camera travels forward).
+- [ ] The 16:9 video showcase docks cleanly within the 3D holographic wireframe and particle accretion ring.
+- [ ] Interactive 3D cursor/glow follower responds smoothly to cursor movements.
+- [ ] The 4 key feature badges dynamically animate in 3D perspective.
+
+### Navigation & Content Polish
+- [ ] The "3D Architecture" navbar link smoothly navigates to the 3D Live Demo section (`#demo`) with zero broken or dead links.
+- [ ] Unnecessary dense technical paragraphs, redundant specs, and blueprint clutter are pruned, leaving a clean, executive, conversion-focused page.
+- [ ] The full navbar (logo, `v2.7.1-production` badge, download action) and the primary Windows Download CTAs are preserved and functional.
+
+### Build & Integrity
+- [ ] `npm run build` completes successfully with 0 TypeScript or lint errors.
+- [ ] All automated test suites (`scripts/verify-scrollytelling.mjs`, `scripts/verify-commercial-suite.mjs`) pass with 100% compliance.
 

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState } from "react";
 import { ChevronDown, HelpCircle, ShieldCheck, Sparkles, Cpu, Lock, Terminal } from "lucide-react";
@@ -57,29 +57,52 @@ const FAQS: FaqItem[] = [
 
 export default function GeoFaqSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [mouseTilt, setMouseTilt] = useState({ x: 0, y: 0 });
 
   const toggleAccordion = (idx: number) => {
     setOpenIndex((prev) => (prev === idx ? null : idx));
   };
 
+  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+    const y = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+    setMouseTilt({ x: x * 3.5, y: -y * 3.5 });
+  };
+
+  const handleMouseLeave = () => {
+    setMouseTilt({ x: 0, y: 0 });
+  };
+
   return (
-    <section id="faq" className="relative py-20 md:py-28 overflow-hidden bg-[#0B0F19] border-t border-[rgba(255,255,255,0.08)]">
+    <section
+      id="faq"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="relative py-20 md:py-28 overflow-hidden bg-transparent border-t border-[rgba(255,255,255,0.08)]"
+    >
       {/* Background ambient lighting */}
       <div
         className="pointer-events-none absolute top-1/2 left-1/2 -z-10 h-[500px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#0047AB]/10 blur-[140px]"
         aria-hidden="true"
       />
 
-      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div
+        className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 transition-transform duration-300 ease-out"
+        style={{
+          transform: `perspective(1000px) rotateX(${mouseTilt.y}deg) rotateY(${mouseTilt.x}deg)`,
+          transformStyle: "preserve-3d",
+        }}
+      >
         {/* Section Header */}
         <div className="text-center pb-12 md:pb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-blue-500/30 bg-blue-950/40 text-xs font-mono text-blue-300 mb-4">
-            <HelpCircle className="w-4 h-4 text-blue-400" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-950/40 text-xs font-mono text-cyan-300 mb-4 shadow-[0_0_15px_rgba(0,212,255,0.15)]">
+            <HelpCircle className="w-4 h-4 text-cyan-400" />
             <span>AUTHORITY KNOWLEDGE GRAPH &amp; FAQ</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#FFFFFF] tracking-tight">
-            Frequently Asked <span className="text-[#3B82F6]">Technical Questions</span>
+            Frequently Asked <span className="text-cyan-400">Technical Questions</span>
           </h2>
 
           <p className="mt-4 text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl mx-auto">
@@ -87,23 +110,23 @@ export default function GeoFaqSection() {
           </p>
         </div>
 
-        {/* FAQ Accordion List */}
+        {/* FAQ Accordion List - Pure Dark Glassmorphism allowing 3D particles to flow behind */}
         <div className="space-y-4">
           {FAQS.map((faq, idx) => {
             const isOpen = openIndex === idx;
             return (
               <div
                 key={faq.question}
-                className="rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[#111827] overflow-hidden transition-all duration-200 hover:border-white/20 shadow-lg shadow-black/40"
+                className="rounded-2xl border border-[rgba(0,212,255,0.15)] bg-[#0A0F1C]/45 backdrop-blur-xl overflow-hidden transition-all duration-300 hover:border-cyan-400/50 hover:bg-[#0E1626]/70 shadow-lg shadow-black/40"
               >
                 <button
                   type="button"
                   onClick={() => toggleAccordion(idx)}
-                  className="flex w-full items-center justify-between p-5 sm:p-6 text-left focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#3B82F6]"
+                  className="flex w-full items-center justify-between p-5 sm:p-6 text-left focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-cyan-400 cursor-pointer"
                   aria-expanded={isOpen}
                 >
                   <div className="flex items-center gap-3 pr-4">
-                    <span className="shrink-0 px-2.5 py-1 rounded-md text-[11px] font-mono font-medium border border-blue-500/30 bg-blue-950/60 text-blue-300">
+                    <span className="shrink-0 px-2.5 py-1 rounded-md text-[11px] font-mono font-medium border border-cyan-500/30 bg-cyan-950/60 text-cyan-300">
                       {faq.tag}
                     </span>
                     <span className="text-base sm:text-lg font-semibold text-[#FFFFFF] tracking-tight">
@@ -112,13 +135,13 @@ export default function GeoFaqSection() {
                   </div>
                   <ChevronDown
                     className={`w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200 ${
-                      isOpen ? "rotate-180 text-blue-400" : ""
+                      isOpen ? "rotate-180 text-cyan-400" : ""
                     }`}
                   />
                 </button>
 
                 {isOpen && (
-                  <div className="px-5 pb-6 sm:px-6 sm:pb-6 pt-1 text-sm sm:text-base text-slate-300 leading-relaxed border-t border-[rgba(255,255,255,0.06)] bg-[#0E1524]">
+                  <div className="px-5 pb-6 sm:px-6 sm:pb-6 pt-1 text-sm sm:text-base text-slate-300 leading-relaxed border-t border-[rgba(0,212,255,0.1)] bg-[#070B14]/80">
                     <p>{faq.answer}</p>
                   </div>
                 )}
@@ -128,10 +151,10 @@ export default function GeoFaqSection() {
         </div>
 
         {/* Direct Technical Verification Footer */}
-        <div className="mt-12 p-5 rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[#111827] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-400">
+        <div className="mt-12 p-5 rounded-2xl border border-[rgba(0,212,255,0.15)] bg-[#0A0F1C]/45 backdrop-blur-xl flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-400 shadow-lg shadow-black/30">
           <div className="flex items-center gap-2">
             <Terminal className="w-4 h-4 text-emerald-400 shrink-0" />
-            <span>Machine-readable documentation indexed in <code className="text-sky-300 bg-black/40 px-1.5 py-0.5 rounded">/llms.txt</code> and <code className="text-sky-300 bg-black/40 px-1.5 py-0.5 rounded">/sitemap.xml</code></span>
+            <span>Machine-readable documentation indexed in <code className="text-cyan-300 bg-black/40 px-1.5 py-0.5 rounded">/llms.txt</code> and <code className="text-cyan-300 bg-black/40 px-1.5 py-0.5 rounded">/sitemap.xml</code></span>
           </div>
           <div className="text-slate-300">
             Compliant with Schema.org &amp; Open LLMs Standard

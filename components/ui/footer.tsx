@@ -5,7 +5,7 @@ export default function Footer() {
   const currentYear = 2026;
 
   return (
-    <footer className="relative border-t border-gray-800/80 bg-gray-950 text-slate-400">
+    <footer className="relative border-t border-white/[0.08] bg-transparent text-slate-400">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8 mb-12">
           {/* Brand & System Status */}

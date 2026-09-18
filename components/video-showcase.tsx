@@ -66,6 +66,74 @@ export default function VideoShowcase({
   const sha512Checksum =
     "acc168926f7bbb553b954a6fe5c9a8b61797626088a117de653e211feec6e6f6420690a193b9d92c5bcb69f3fe639c231381e4f852212899b0012212fbe914e5";
 
+  // Dispatch video state to synchronize with Three.js 3D accretion ring
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(
+        new CustomEvent("novapilot:video-play", { detail: { isPlaying } })
+      );
+    }
+  }, [isPlaying]);
+
+  // Scroll-driven 3D docking transform into Three.js holographic wireframe and accretion ring with mouse parallax
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) return;
+
+    let animationFrameId: number;
+    const mouseTilt = { x: 0, y: 0 };
+
+    const onMouseMove = (e: MouseEvent) => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 2;
+      const y = (e.clientY / window.innerHeight - 0.5) * 2;
+      mouseTilt.x = x * 3.5;
+      mouseTilt.y = -y * 3.5;
+    };
+    window.addEventListener("mousemove", onMouseMove, { passive: true });
+
+    const updateDocking = () => {
+      if (!containerRef.current) return;
+      const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+      const p = Math.max(0.0, Math.min(3.0, (window.scrollY / maxScroll) * 3.0));
+
+      // Scroll progress p in [1.2, 2.4]: docks to 1.0 at p = 2.0
+      // Transitions from scale(0.93) rotateX(5deg) translateZ(-60px) -> scale(1.0) rotateX(0deg) translateZ(0px)
+      let dock = 0;
+      if (p <= 1.2) {
+        dock = 0;
+      } else if (p < 2.0) {
+        dock = (p - 1.2) / 0.8;
+      } else if (p <= 2.4) {
+        dock = 1.0 - ((p - 2.0) / 0.4) * 0.12;
+      } else {
+        dock = 0.88;
+      }
+      dock = Math.max(0, Math.min(1, dock));
+
+      const scale = 0.93 + 0.07 * dock;
+      const rotX = 5.0 * (1.0 - dock);
+      const transZ = -60.0 * (1.0 - dock);
+
+      containerRef.current.style.transform = `perspective(1200px) scale(${scale.toFixed(4)}) rotateX(${(rotX + mouseTilt.y).toFixed(2)}deg) rotateY(${mouseTilt.x.toFixed(2)}deg) translateZ(${transZ.toFixed(1)}px)`;
+      containerRef.current.style.transformStyle = "preserve-3d";
+      containerRef.current.style.willChange = "transform";
+    };
+
+    const onScroll = () => {
+      cancelAnimationFrame(animationFrameId);
+      animationFrameId = requestAnimationFrame(updateDocking);
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    updateDocking();
+
+    return () => {
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, []);
+
   // Safe formatting helper mm:ss
   const formatTime = (timeInSeconds: number): string => {
     if (isNaN(timeInSeconds) || timeInSeconds < 0) return "00:00";
@@ -234,7 +302,7 @@ export default function VideoShowcase({
   const progressPercent = duration > 0 ? Math.min(100, Math.max(0, (currentTime / duration) * 100)) : 0;
 
   return (
-    <section id="showcase" className={`relative py-16 md:py-24 overflow-hidden bg-slate-950 ${className}`}>
+    <section id="showcase" className={`relative py-16 md:py-24 overflow-hidden bg-transparent ${className}`}>
       {/* Background ambient lighting */}
       <div
         className="pointer-events-none absolute top-1/4 left-1/2 -z-10 h-[550px] w-[950px] -translate-x-1/2 rounded-full bg-cyan-950/20 blur-[140px]"
@@ -246,16 +314,16 @@ export default function VideoShowcase({
         <div className="mx-auto max-w-3xl text-center pb-10 md:pb-12">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono border border-cyan-500/30 bg-cyan-950/40 text-cyan-300 mb-4 shadow-[0_0_16px_rgba(6,182,212,0.15)]">
             <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-            <span>Official Commercial Ad Showcase • 1080p 60 FPS</span>
+            <span>3D Neural Architecture • Live HUD Demonstration</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-4">
-            Witness NovaPilot AI in Action
+            3D Architecture &amp; Live HUD Demo
           </h2>
 
           <p className="text-slate-300 text-base sm:text-lg leading-relaxed">
             Direct high-definition demonstration of NovaPilot&apos;s stealth HUD overlay,
-            zero-latency audio loopback stream synthesis, and screen-share exclusion.
+            zero-latency WASAPI loopback audio stream synthesis, and screen-share capture exclusion.
           </p>
         </div>
 
@@ -264,27 +332,12 @@ export default function VideoShowcase({
           ref={containerRef}
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
-          className="relative aspect-video w-full max-w-5xl mx-auto rounded-3xl overflow-hidden bg-slate-950 border border-slate-800 shadow-[0_0_60px_-15px_rgba(6,182,212,0.25)] min-h-[280px] sm:min-h-[460px] group select-none"
+          className="relative aspect-video w-full max-w-5xl mx-auto rounded-3xl overflow-hidden bg-[#0A0F1C]/40 backdrop-blur-md border border-cyan-500/30 shadow-[0_0_60px_-15px_rgba(6,182,212,0.35)] min-h-[280px] sm:min-h-[460px] group select-none"
         >
-          {/* Top Chassis Chrome Header Bar */}
-          <div className="absolute top-0 inset-x-0 z-20 flex items-center justify-between px-4 sm:px-6 py-3 bg-gradient-to-b from-slate-950/90 via-slate-950/60 to-transparent pointer-events-none">
-            <div className="flex items-center gap-2">
-              <span className="w-3 h-3 rounded-full bg-rose-500/80 border border-rose-400/40" />
-              <span className="w-3 h-3 rounded-full bg-amber-500/80 border border-amber-400/40" />
-              <span className="w-3 h-3 rounded-full bg-emerald-500/80 border border-emerald-400/40" />
-              <span className="ml-2.5 text-xs font-mono text-slate-300 hidden sm:inline">
-                novapilot-v2.7.1 :: commercial_showcase.mp4
-              </span>
-            </div>
-
-            <div className="flex items-center gap-2 text-[11px] font-mono text-cyan-300">
-              <span className="px-2 py-0.5 rounded bg-cyan-950/80 border border-cyan-500/30">
-                1920×1080 16:9
-              </span>
-              <span className="hidden sm:inline px-2 py-0.5 rounded bg-slate-900/80 border border-slate-700 text-slate-300">
-                H.264 / AAC
-              </span>
-            </div>
+          {/* Top Subtle Status Badge */}
+          <div className="absolute top-3.5 left-4 z-20 pointer-events-none flex items-center gap-2 px-3 py-1 rounded-full bg-slate-950/60 backdrop-blur-md border border-white/10 text-[11px] font-mono text-cyan-300">
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+            <span>1080p 60 FPS • 16:9</span>
           </div>
 
           {/* HTML5 Native Video Tag */}
@@ -295,7 +348,7 @@ export default function VideoShowcase({
             preload="metadata"
             playsInline
             loop={isLooping}
-            className="w-full h-full object-cover cursor-pointer bg-slate-950"
+            className="w-full h-full object-cover cursor-pointer bg-transparent"
             onClick={togglePlay}
             onTimeUpdate={handleTimeUpdate}
             onLoadedMetadata={handleLoadedMetadata}
@@ -416,9 +469,8 @@ export default function VideoShowcase({
                     step="0.05"
                     value={isMuted ? 0 : volume}
                     onChange={handleVolumeChange}
-                    className="w-14 sm:w-20 accent-cyan-400 cursor-pointer h-1.5 bg-slate-800 rounded-lg"
-                    aria-label="Volume slider"
-                    title="Volume slider"
+                    className="w-14 sm:w-20 h-1.5 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-cyan-400"
+                    aria-label="Volume Slider"
                   />
                 </div>
 
@@ -467,104 +519,69 @@ export default function VideoShowcase({
           </div>
         </div>
 
-        {/* Adjacent Executive Download CTA Card */}
-        <div className="mt-8 mx-auto max-w-5xl rounded-3xl border border-cyan-500/30 bg-gradient-to-b from-slate-900/90 via-slate-950 to-slate-950 p-6 sm:p-8 backdrop-blur-xl shadow-2xl">
-          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
-            <div className="space-y-2 max-w-2xl">
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono bg-emerald-950/60 border border-emerald-500/30 text-emerald-300">
-                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-                  <span>v2.7.1 (Build 2026.3)</span>
-                </span>
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono bg-cyan-950/60 border border-cyan-500/30 text-cyan-300">
-                  <span>Windows 10 / 11 (64-bit)</span>
-                </span>
-              </div>
-
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-                Equip NovaPilot Desktop v2.7.1
-              </h3>
-
-              <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
-                Direct native installer with hardware WASAPI audio loopback, ThinkStripper reasoning extraction,
-                and Win32 screen-share capture exclusion.
-              </p>
+        {/* 3D Architecture Subsystem Grid */}
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 max-w-5xl mx-auto">
+          <div className="rounded-2xl border border-[rgba(0,212,255,0.15)] bg-[#0A0F1C]/45 backdrop-blur-xl p-5 text-left transition-all duration-200 hover:border-cyan-400/40 hover:bg-[#0E1626]/70 shadow-lg shadow-black/40">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-xs font-mono font-semibold text-cyan-400">WASAPI Loopback</span>
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-950/60 border border-cyan-500/30 text-cyan-300">&lt;5ms Latency</span>
             </div>
-
-            {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full lg:w-auto">
-              <a
-                href="https://github.com/ellsimohammed8-prog/novapilot-website/releases/download/v2.7.1/NovaPilot-AI-Setup-2.7.1.exe"
-                download="NovaPilot-AI-Setup-2.7.1.exe"
-                className="inline-flex items-center justify-center gap-3 px-6 py-3.5 min-h-[44px] rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600 hover:from-cyan-500 hover:via-blue-500 hover:to-indigo-500 border border-cyan-400/30 shadow-[0_0_24px_rgba(6,182,212,0.3)] transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:outline-hidden"
-                aria-label="Download Setup Installer (.exe)"
-                title="Download NovaPilot Desktop Installer directly"
-              >
-                <WindowsIcon className="w-4 h-4 fill-current text-white" />
-                <span>Download Setup Installer (.exe)</span>
-                <span className="text-[11px] font-mono font-medium px-1.5 py-0.5 rounded bg-black/30 text-cyan-200 border border-cyan-400/30">
-                  v2.7.1
-                </span>
-              </a>
-
-              <a
-                href="https://github.com/ellsimohammed8-prog/novapilot-website/releases/download/v2.7.1/NovaPilot-AI-2.7.1.exe"
-                download="NovaPilot-AI-2.7.1.exe"
-                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 min-h-[44px] rounded-xl text-sm font-semibold text-slate-200 bg-slate-900 hover:bg-slate-800 border border-slate-700 hover:border-slate-600 transition-all active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:outline-hidden"
-                aria-label="Download Portable (.exe)"
-                title="Download Portable .exe directly without installation"
-              >
-                <Download className="w-4 h-4 text-cyan-400" />
-                <span>Download Portable (.exe)</span>
-              </a>
-            </div>
+            <p className="text-xs text-slate-300 leading-relaxed">
+              Hardware-direct audio ingestion without virtual cables. Sub-millisecond ring buffer with sinc resampler.
+            </p>
           </div>
 
-          {/* Cryptographic SHA-512 Checksum Card */}
-          <div className="mt-6 pt-6 border-t border-slate-800/80">
-            <div className="flex flex-wrap items-center justify-between gap-3 pb-2.5 text-xs font-mono text-slate-300">
-              <div className="flex items-center gap-2">
-                <FileCode className="w-4 h-4 text-cyan-400" />
-                <span className="text-white font-semibold">Cryptographic SHA-512 Integrity Checksum</span>
-                <span className="text-[10px] px-2 py-0.5 rounded bg-emerald-950/60 border border-emerald-500/30 text-emerald-400">
-                  SHA-512 Verified
-                </span>
-              </div>
-
-              <button
-                type="button"
-                onClick={handleCopyHash}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-mono transition-colors focus-visible:ring-2 focus-visible:ring-cyan-400"
-                aria-label="Copy SHA-512 checksum"
-                title="Copy SHA-512 checksum to clipboard"
-              >
-                {copiedHash ? (
-                  <>
-                    <Check className="w-3.5 h-3.5 text-emerald-400" />
-                    <span className="text-emerald-400">Copied!</span>
-                  </>
-                ) : (
-                  <>
-                    <Copy className="w-3.5 h-3.5 text-slate-400" />
-                    <span>Copy Hash</span>
-                  </>
-                )}
-              </button>
+          <div className="rounded-2xl border border-[rgba(0,212,255,0.15)] bg-[#0A0F1C]/45 backdrop-blur-xl p-5 text-left transition-all duration-200 hover:border-cyan-400/40 hover:bg-[#0E1626]/70 shadow-lg shadow-black/40">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-xs font-mono font-semibold text-emerald-400">ThinkStripper FSM</span>
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-950/60 border border-emerald-500/30 text-emerald-300">Zero-Leak Filter</span>
             </div>
+            <p className="text-xs text-slate-300 leading-relaxed">
+              Finite-State Machine removing internal reasoning tokens on-the-fly for DeepSeek-R1 &amp; Claude 3.7.
+            </p>
+          </div>
 
-            <div className="mt-2 break-all text-slate-400 select-all font-mono text-[11px] leading-relaxed bg-black/60 p-3 rounded-xl border border-slate-900">
-              {sha512Checksum}
+          <div className="rounded-2xl border border-[rgba(0,212,255,0.15)] bg-[#0A0F1C]/45 backdrop-blur-xl p-5 text-left transition-all duration-200 hover:border-cyan-400/40 hover:bg-[#0E1626]/70 shadow-lg shadow-black/40">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-xs font-mono font-semibold text-purple-400">Win32 Invisibility</span>
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-purple-950/60 border border-purple-500/30 text-purple-300">100% Invisible</span>
             </div>
+            <p className="text-xs text-slate-300 leading-relaxed">
+              OS-level display capture exclusion API prevents HUD detection across Zoom, Teams, and Google Meet.
+            </p>
+          </div>
+        </div>
 
-            <div className="mt-2.5 flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono text-slate-500">
-              <span>
-                Verify via PowerShell:{" "}
-                <code className="text-slate-300">
-                  Get-FileHash NovaPilot-AI-Setup-2.7.1.exe -Algorithm SHA512
-                </code>
+        {/* Cryptographic SHA-512 Verification Chip */}
+        <div className="mt-4 max-w-5xl mx-auto rounded-xl border border-[rgba(0,212,255,0.15)] bg-[#0A0F1C]/40 backdrop-blur-xl p-3.5 font-mono text-xs text-slate-300">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+            <div className="flex items-center gap-2.5">
+              <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+              <span className="text-white font-semibold">
+                Official Cryptographic SHA-512 Integrity Checksum Verified
               </span>
-              <span className="text-emerald-400">Release Build: 2026.3 • Stable</span>
+              <span className="text-[10px] text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-500/30">
+                Clean &amp; Signed (~489 MB Size)
+              </span>
             </div>
+            <button
+              type="button"
+              onClick={handleCopyHash}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cyan-950/50 hover:bg-cyan-900/60 text-cyan-300 border border-cyan-500/30 transition-all cursor-pointer text-xs active:scale-95"
+              title="Copy SHA-512 Checksum Hash"
+            >
+              {copiedHash ? (
+                <>
+                  <Check className="w-3.5 h-3.5 text-emerald-400" />
+                  <span className="text-emerald-400 font-medium">Checksum Copied!</span>
+                </>
+              ) : (
+                <>
+                  <Copy className="w-3.5 h-3.5" />
+                  <span>Copy SHA-512 Checksum</span>
+                </>
+              )}
+            </button>
           </div>
         </div>
       </div>

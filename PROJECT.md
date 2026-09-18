@@ -1,83 +1,114 @@
-# Project: NovaPilot AI SEO & Generative Engine Optimization (GEO)
+# Project: NovaPilot AI True 3D Spatial Scrollytelling & High-Conversion Polish
 
 ## Architecture
 - **Framework**: Next.js 15 (React 19, App Router) with static export to `./out`
-- **Styling**: Tailwind CSS v4 with `@theme` executive design tokens
-- **Target Audience / AI Ingestion**: ChatGPT Search, Perplexity AI, Claude Web, Google-Extended, Bing Copilot, and human technical evaluators
-- **Canonical Domain**: `https://novapilotai.ellsimohammed8.workers.dev`
-- **Structured Knowledge Graph**: Semantic Schema.org JSON-LD microdata (`SoftwareApplication`, `Organization`, `FAQPage`, `TechArticle`)
-- **Standardized AI Context Layer**: `/llms.txt` and `/llms-full.txt` conforming to the open /llms.txt specification
-- **Crawler Directives & Sitemap**: `public/robots.txt` explicitly permitting AI search bots, and XML Sitemap 0.9 schema (`public/sitemap.xml`)
-- **On-Page Citation Anchoring**: High-intent technical FAQ & comparison section in `app/(default)/page.tsx` utilizing semantic `<article>` and `<section>` tags
+- **Styling**: Tailwind CSS v4 with `@theme` tokens in `app/css/style.css` and `app/css/additional-styles/theme.css`
+- **3D Graphics Engine**: Three.js r173 (`^0.173.0`) full-screen fixed WebGL background canvas (`fixed inset-0 z-0 pointer-events-none`)
+- **Particle System**: Procedural 6,500-particle GPU-accelerated system (`THREE.Points` + `THREE.ShaderMaterial`) with 4 morph target coordinate buffers:
+  - Phase 1 (Hero): Concentrated glowing Nova core responding to cursor parallax
+  - Phase 2 (Features): Radial particle burst framing the 4 key technical badges
+  - Phase 3 (Video): Relativistic accretion ring enveloping the holographic 16:9 video showcase frame
+  - Phase 4 (Download/CTA): Cinematic upward camera tilt focusing on the Windows Download call-to-action
+- **3D Spatial DOM Choreography**:
+  - Direct DOM ref GPU-composited CSS 3D transforms (`perspective(1200px) translate3d(0, Y, Z) scale(S)`)
+  - Hero headline & subtitle physically recede backward along Z to Z = -450px, scale down to 0.52, and spatially disperse/defocus as 3D camera flies forward through starfield
+  - Phase 2: 4 key feature cards glide into 3D viewport from 4 peripheral quadrants, framing the expanding cosmic particle field
+  - Phase 3: 16:9 Video Showcase docks into 3D holographic wireframe and accretion ring (`scale(0.93) rotateX(5deg) -> scale(1.0) rotateX(0deg) translateZ(0px)`)
+- **Interactive 3D Cursor**: Client component `components/interactive-3d-cursor.tsx` with glowing cyan reticle (`#00F0FF`), inertia damping, 12-particle micro-trail, velocity stretch, magnetic hover snap, and mobile touch guards (`@media (pointer: coarse)`)
+- **High-Conversion Marketing Flow**:
+  1. Hero Hook & Instant Windows Download CTA
+  2. 4 Sleek Floating Glassmorphic Badges (`id="features"`)
+  3. Cinematic 16:9 Video Showcase with holographic HUD framing (`id="demo"`)
+  4. Concise FAQ / Trust Badges (`id="faq"`)
+  5. High-Conversion Windows Download Portal (`id="download"`, specs `id="specs"`)
+- **Navigation**: Re-anchored "3D Architecture" link in top navigation bar smoothly scrolling to `#demo`, with all navbar links (`#features`, `#demo`, `#specs`, `#download`) active and zero dead links.
 
 ## Code Layout
-- `public/llms.txt` — Standardized condensed AI model context file with verified technical specs and download links
-- `public/llms-full.txt` — Comprehensive technical architecture, DSP algorithms, and API documentation for LLMs
-- `public/robots.txt` — Production crawler directives welcoming OpenAI, Perplexity, Anthropic, Google, and Bing AI bots
-- `public/sitemap.xml` — XML sitemap 0.9 schema with canonical URLs and section anchors
-- `components/seo/json-ld.tsx` — Semantic Schema.org JSON-LD microdata component (`SoftwareApplication`, `Organization`, `FAQPage`, `TechArticle`)
-- `app/layout.tsx` — Root layout mounting `JsonLd` with canonical tags, OpenGraph, and Twitter Card metadata
-- `app/(default)/page.tsx` — Home page mounting high-intent technical FAQ & comparison section (`#faq`)
-- `scripts/verify-seo-geo.mjs` — Automated programmatic verification script validating all SEO/GEO assets and schemas
-- `release/` — Official Windows release binaries (`NovaPilot-AI-Setup-2.7.1.exe`) and checksums
+- `components/supernova-cosmic-canvas.tsx` — Full-screen fixed Three.js 6,500-particle scrollytelling canvas with 4-phase camera waypoints, parallax, and clean WebGL disposal
+- `components/hero.tsx` — Hero section with 3D Z-axis text recession, scale reduction, spatial dispersion, and 4 peripheral gliding feature badges
+- `components/video-showcase.tsx` — 16:9 video showcase with scroll-driven 3D docking transform into the holographic wireframe
+- `components/interactive-3d-cursor.tsx` — Interactive glowing cyan 3D cursor follower with velocity physics and particle trail
+- `components/ui/header.tsx` — Navigation bar with re-anchored `#demo` link, preserved logo, `v2.7.1-production` badge, and download action
+- `app/(default)/page.tsx` — High-conversion 5-section marketing landing page mounting canvas, cursor, hero, video showcase, FAQ, and download portal
+- `scripts/verify-scrollytelling.mjs` — Automated E2E verification test harness validating all 3D spatial and scrollytelling requirements
+- `scripts/verify-commercial-suite.mjs` — Commercial compliance test suite (196 tests)
+- `components/features-grid.tsx` — Preserved on disk for test suite compatibility, unmounted from main page JSX
+- `components/specs-table.tsx` — Preserved on disk for test suite compatibility, unmounted from main page JSX
+- `components/interactive-architecture.tsx` — Preserved on disk for test suite compatibility
+- `components/media-showcase.tsx` — Preserved on disk for test suite compatibility
+- `components/hero-transformation-canvas.tsx` — Preserved on disk for test suite compatibility
 
 ## Feature Inventory
 | # | Feature | Description | Milestone | Source |
 |---|---------|-------------|-----------|--------|
-| 1 | Standardized `/llms.txt` | Condensed markdown context for LLMs with architecture specs and download URLs | M1 | User Request §1 |
-| 2 | Comprehensive `/llms-full.txt` | Exhaustive technical documentation for AI ingestion (WASAPI, ThinkStripper, DWM) | M1 | User Request §1 |
-| 3 | AI Crawler `robots.txt` | Explicitly allows `OAI-SearchBot`, `GPTBot`, `PerplexityBot`, `ClaudeBot`, `Google-Extended`, etc. | M2 | User Request §2 |
-| 4 | Canonical `sitemap.xml` | XML 0.9 schema for `https://novapilotai.ellsimohammed8.workers.dev` with priority & changefreq | M2 | User Request §2 |
-| 5 | Schema.org JSON-LD Component | React component generating valid `SoftwareApplication`, `Organization`, `FAQPage`, `TechArticle` | M3 | User Request §3 |
-| 6 | Root Layout Metadata & Mounting | Mount JSON-LD in `app/layout.tsx`, configure canonical URL, OpenGraph, and Twitter Cards | M3 | User Request §3 |
-| 7 | On-Page High-Intent Technical FAQ | Section in `app/(default)/page.tsx` answering top search queries with semantic `<article>` tags | M4 | User Request §4 |
-| 8 | Semantic Citation Anchoring | Structured anchor targets (`#faq`, `#specs`, `#architecture`) with rich microdata alignment | M4 | User Request §4 |
-| 9 | Automated Programmatic SEO Test Script | Script verifying syntax, file presence, XML validity, and JSON-LD schema correctness | M5 | User Request §5 |
-| 10 | Static Export Build Verification | `npm run build` static export into `./out` with zero errors | M6 | User Request §5 |
-| 11 | Reviewer, Challenger & Forensic Audit Gate | Independent verification of quality, correctness, and authentic implementation | M6 | Dual Track |
-| 12 | Git Commit & Push to Main | Git push to `main` branch triggering automatic Cloudflare Workers deployment | M6 | User Request §5 |
+| 1 | WebGL Disposal Bugfix | Fix `cornerMat.material.dispose()` in `supernova-cosmic-canvas.tsx:611` | M1 | Survey (Tests & Marketing) |
+| 2 | Hero Text Z-Axis Choreography | Direct DOM ref GPU CSS 3D transform (`perspective(1200px) translate3d(0, Y, Z) scale(S)`) receding backward to Z=-450px with spatial dispersion | M1 | User Request R1 |
+| 3 | 4 Feature Badges 3D Gliding | 4-quadrant peripheral gliding trajectories into 3D viewport framing Phase 2 particle burst | M1 | User Request R1 |
+| 4 | 16:9 Video Showcase 3D Docking | Scroll-driven 3D transform docking video container into holographic wireframe & accretion ring | M1 | User Request R1 |
+| 5 | Interactive 3D Cursor Follower | Cyan glowing reticle (`#00F0FF`), inertia damping, 12-particle trail, velocity stretch, hover snap | M1 | User Request R1 |
+| 6 | 5-Section Marketing Flow Condensation | Condense `app/(default)/page.tsx` to 5 high-impact marketing sections | M2 | User Request R2 |
+| 7 | Technical Clutter & Blueprint Purge | Unmount `FeaturesGrid` and `SpecsTable` from `page.tsx` while retaining files on disk | M2 | User Request R2 |
+| 8 | Navbar Re-anchoring to `#demo` | Re-anchor "3D Architecture" to `#demo`, remove duplicate "Live Demo", ensure all links functional | M2 | User Request R2 |
+| 9 | Navbar Brand & Badge Preservation | Retain brand logo, version badge `v2.7.1-production`, and download action buttons | M2 | User Request R2 |
+| 10 | Automated Scrollytelling Suite Hardening | Add assertions for 3D Z-axis movement, video docking, 3D cursor, badge animation, `#demo` anchoring | M3 | User Request AC |
+| 11 | Commercial Suite 100% Pass | Maintain 100% compliance on `scripts/verify-commercial-suite.mjs` (196/196) | M3 | User Request AC |
+| 12 | Clean Static Build (`npm run build`) | Achieve 0 TypeScript/ESLint errors and successful static export into `./out` | M4 | User Request AC |
+| 13 | Multi-Agent Review, Challenge & Audit Gate | 2 Reviewers, 2 Challengers, and 1 Forensic Auditor gate verification | M4 | Dual Track & Pattern |
 
 ## Milestones
 | # | Name | Scope | Dependencies | Status |
 |---|------|-------|-------------|--------|
-| M1 | LLM Ingestion Layer | `public/llms.txt` & `public/llms-full.txt` with verified specs & SHA-512 | none | PLANNED |
-| M2 | Crawler Access & Sitemap | `public/robots.txt` & `public/sitemap.xml` with canonical URLs & AI bots | none | PLANNED |
-| M3 | Rich Microdata & Schema.org JSON-LD | `components/seo/json-ld.tsx` & `app/layout.tsx` metadata updates | none | PLANNED |
-| M4 | On-Page Authority FAQ & Content | `app/(default)/page.tsx` semantic FAQ section & citation anchors | M3 | PLANNED |
-| M5 | Programmatic SEO Verification | `scripts/verify-seo-geo.mjs` test harness for all assets | M1, M2, M3, M4 | PLANNED |
-| M6 | Build Certification, Audit & Deployment | Static build export, multi-agent audit gate, git commit & push to `main` | M1, M2, M3, M4, M5 | PLANNED |
+| M1 | 3D Spatial Scrollytelling & Interactive Cursor | `supernova-cosmic-canvas.tsx`, `hero.tsx`, `video-showcase.tsx`, `interactive-3d-cursor.tsx` | none | PLANNED |
+| M2 | Marketing Flow Condensation & Navigation Polish | `app/(default)/page.tsx`, `components/ui/header.tsx`, `windows-cta.tsx` | none | PLANNED |
+| M3 | Automated E2E Test Suite Hardening | `scripts/verify-scrollytelling.mjs` | M1, M2 | PLANNED |
+| M4 | Build Certification, Multi-Agent Review & Gate | `npm run build`, Reviewers, Challengers, Forensic Auditor | M1, M2, M3 | PLANNED |
 
 ## Interface Contracts
-### Schema.org JSON-LD Contract (`components/seo/json-ld.tsx`)
-- Exports default React component returning `<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaGraph) }} />`
-- Schema graph items:
-  1. `SoftwareApplication`:
-     - `@type`: `"SoftwareApplication"`
-     - `name`: `"NovaPilot AI"`
-     - `operatingSystem`: `"Windows 10, Windows 11"`
-     - `applicationCategory`: `"UtilitiesApplication"`
-     - `softwareVersion`: `"2.7.1"`
-     - `downloadUrl`: `"https://github.com/ellsimohammed8-prog/novapilot-website/releases/download/v2.7.1/NovaPilot-AI-Setup-2.7.1.exe"`
-     - `offers`: `{ "@type": "Offer", "price": "0", "priceCurrency": "USD" }`
-  2. `Organization`:
-     - `@type`: `"Organization"`
-     - `name`: `"NovaPilot AI"`
-     - `url`: `"https://novapilotai.ellsimohammed8.workers.dev"`
-     - `sameAs`: `["https://github.com/ellsimohammed8-prog/novapilot-ai", "https://github.com/ellsimohammed8-prog/novapilot-website"]`
-  3. `FAQPage`:
-     - `@type`: `"FAQPage"`
-     - `mainEntity`: Array of Question/Answer objects matching high-intent queries.
-  4. `TechArticle`:
-     - `@type`: `"TechArticle"`
-     - Headline and technical synopsis of WASAPI loopback, ThinkStripper, and WDA_EXCLUDEFROMCAPTURE.
 
-### SEO Verification Script Contract (`scripts/verify-seo-geo.mjs`)
-- Executable via `node scripts/verify-seo-geo.mjs`
-- Validates:
-  1. Existence and non-empty content of `public/llms.txt`, `public/llms-full.txt`, `public/robots.txt`, `public/sitemap.xml`.
-  2. Exact crawler names in `robots.txt`: `OAI-SearchBot`, `ChatGPT-User`, `GPTBot`, `PerplexityBot`, `Perplexity-User`, `ClaudeBot`, `Claude-Web`, `Googlebot`, `Google-Extended`, `Bingbot`.
-  3. `sitemap.xml` XML well-formedness and schema compliance.
-  4. `components/seo/json-ld.tsx` exports valid JSON-LD graph with required types.
-  5. `app/layout.tsx` imports and renders `JsonLd`.
-  6. `app/(default)/page.tsx` contains FAQ section with required queries.
-- Exits with code 0 on 100% pass, non-zero on failure.
+### 3D Spatial Scrollytelling Contract (`components/hero.tsx` & `components/supernova-cosmic-canvas.tsx`)
+- Hero Typography:
+  - Binds normalized scroll progress $p \in [0.0, 1.0]$ via `requestAnimationFrame` loop on direct DOM `ref`.
+  - Transform: `perspective(1200px) translate3d(0, ${y}px, ${z}px) scale(${s})`
+  - $z$ range: $0\text{px} \to -450\text{px}$
+  - $s$ range: $1.0 \to 0.52$
+  - Defocus / dispersion: `filter: blur(${blur}px)`, opacity: $1.0 \to 0.0$
+- 4 Key Feature Badges:
+  - Quadrant gliding: cards glide from peripheral offsets $(\pm 100\text{px}, \pm 25\text{px}, -120\text{px})$ into $(0, 0, 0)$ locking at $p \approx 0.8 - 1.0$.
+  - Dark glassmorphism classes:
+    `relative p-3.5 sm:p-4 rounded-xl border border-[rgba(0,212,255,0.15)] bg-[#0A0F1C]/50 backdrop-blur-xl transition-all duration-200 hover:border-cyan-400/30 hover:bg-[#0E1626]/70 shadow-lg shadow-black/30`
+  - Container element includes `id="features"`.
+
+### 16:9 Video Showcase Docking Contract (`components/video-showcase.tsx`)
+- Scroll progress $p \in [1.2, 2.4]$:
+  - Transitions from `scale(0.93) rotateX(5deg) translateZ(-60px)` to `scale(1.0) rotateX(0deg) translateZ(0px)` at $p = 2.0$, docking into the Three.js holographic wireframe.
+  - Retains custom styled controls, `novapilot:video-play` event, and download CTA.
+
+### Interactive 3D Cursor Contract (`components/interactive-3d-cursor.tsx`)
+- Exports default client component (`"use client"`)
+- Renders cyan glowing reticle (`box-shadow: 0 0 15px #00F0FF`) and trailing micro-particles.
+- Dynamic velocity stretch based on mouse delta.
+- Magnetic hover scaling on interactive targets (`a`, `button`, `[role="button"]`, `.glass-card`).
+- Hidden on touch devices via `@media (pointer: coarse)`.
+- `pointer-events-none fixed inset-0 z-50`.
+
+### Navigation & Marketing Flow Contract (`components/ui/header.tsx` & `app/(default)/page.tsx`)
+- `header.tsx`:
+  - `navLinks`:
+    - `{ href: "#features", label: "Features" }`
+    - `{ href: "#demo", label: "3D Architecture" }`
+    - `{ href: "#specs", label: "Specifications" }`
+    - `{ href: "#download", label: "Download" }`
+  - Zero dead links; all anchor to active sections.
+- `page.tsx`:
+  - Exactly 5 marketing sections mounted:
+    1. `<SupernovaCosmicCanvas />`
+    2. `<Interactive3dCursor />`
+    3. `<Hero />` (with `id="features"` on badges)
+    4. `<div id="demo"><ErrorBoundary><VideoShowcase /></ErrorBoundary></div>`
+    5. `<GeoFaqSection />` (with `id="faq"`)
+  - `FeaturesGrid` and `SpecsTable` unmounted from JSX, preserved on disk.
+
+### Edge Gateway & Speech-to-Text Pipeline (F6 Architecture)
+- **Cloudflare Edge Gateway & Multi-Key Pool Rotation**: Distributed Cloudflare Edge worker gateway with multi-key pool rotation for high-throughput LLM failover and load balancing across providers.
+- **Real-Time Edge WebSocket STT Relay**: Low-latency WebSocket STT (speech-to-text) streaming relay interfacing Deepgram and local audio buffers for instantaneous transcript generation.
+- **Offline Whisper & Moonshine ONNX Engine**: Local speech-to-text fallback executing quantized Whisper / Moonshine models on-device via DirectML and ONNX Runtime when offline.
