@@ -4,7 +4,6 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import localFont from "next/font/local";
 
-import Header from "@/components/ui/header";
 import JsonLd from "@/components/seo/json-ld";
 
 const inter = Inter({
@@ -43,7 +42,7 @@ const nacelle = localFont({
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#030712",
+  themeColor: "#FAF8F3",
 };
 
 export const metadata: Metadata = {
@@ -51,27 +50,27 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://novapilotai.ellsimohammed8.workers.dev",
   },
-  title: "NovaPilot AI — Executive Stealth HUD Copilot for Windows",
+  title: "NovaPilot AI — Meeting recorder & transcription for Windows",
   description:
-    "Zero-latency dual-stream WASAPI loopback audio capture, ThinkStripper LLM reasoning pipeline, and 100% stealth screen-share protection for Windows 10 & 11.",
+    "NovaPilot AI is a Windows desktop app that records your calls, transcribes both sides live, and files a summary with decisions and action items. Local-first: your audio never leaves your machine. Free download, v2.7.1.",
   keywords: [
     "NovaPilot",
     "NovaPilot AI",
-    "stealth HUD copilot",
+    "meeting recorder",
+    "meeting transcription",
+    "call summaries",
+    "action items",
     "WASAPI loopback audio",
     "ThinkStripper",
-    "screen-share protection",
-    "DeepSeek R1",
-    "Claude 3.7",
-    "executive copilot",
+    "local-first",
     "Windows desktop AI",
     "Generative Engine Optimization",
   ],
   authors: [{ name: "NovaPilot AI Core Team" }],
   openGraph: {
-    title: "NovaPilot AI — Executive Stealth HUD Copilot for Windows",
+    title: "NovaPilot AI — Meeting recorder & transcription for Windows",
     description:
-      "Executive stealth HUD copilot for Windows featuring hardware WASAPI loopback audio ingestion, ThinkStripper reasoning extraction FSM, and WDA_EXCLUDEFROMCAPTURE screen-share protection.",
+      "A Windows desktop app that records your calls, transcribes both sides live, and files a summary with decisions and action items. Local-first: your audio never leaves your machine.",
     url: "https://novapilotai.ellsimohammed8.workers.dev",
     siteName: "NovaPilot AI",
     images: [
@@ -79,7 +78,7 @@ export const metadata: Metadata = {
         url: "/images/hero-dormant-blueprint.jpg",
         width: 1200,
         height: 630,
-        alt: "NovaPilot AI — Executive Stealth HUD Copilot for Windows",
+        alt: "NovaPilot AI — Meeting recorder & transcription for Windows",
       },
     ],
     type: "website",
@@ -87,9 +86,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "NovaPilot AI — Executive Stealth HUD Copilot for Windows",
+    title: "NovaPilot AI — Meeting recorder & transcription for Windows",
     description:
-      "Executive stealth HUD copilot for Windows featuring hardware WASAPI loopback audio ingestion, ThinkStripper reasoning extraction FSM, and WDA_EXCLUDEFROMCAPTURE screen-share protection.",
+      "A Windows desktop app that records your calls, transcribes both sides live, and files a summary with decisions and action items. Local-first: your audio never leaves your machine.",
     images: ["/images/hero-dormant-blueprint.jpg"],
   },
   robots: {
@@ -111,17 +110,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark scroll-smooth">
+    <html lang="en" className="scroll-smooth">
       <head>
         <JsonLd />
       </head>
-      <body
-        className={`${inter.variable} ${nacelle.variable} bg-gray-950 font-inter text-base text-gray-200 antialiased selection:bg-cyan-500/30 selection:text-cyan-200`}
-      >
-        <div className="flex min-h-screen flex-col overflow-hidden supports-[overflow:clip]:overflow-clip">
-          <Header />
-          {children}
-        </div>
+      <body className={`${inter.variable} ${nacelle.variable}`}>
+        {children}
       </body>
     </html>
   );

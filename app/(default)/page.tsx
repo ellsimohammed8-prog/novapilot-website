@@ -1,43 +1,38 @@
-import SupernovaCosmicCanvas from "@/components/supernova-cosmic-canvas";
-import Interactive3dCursor from "@/components/interactive-3d-cursor";
-import Hero from "@/components/hero";
-import VideoShowcase from "@/components/video-showcase";
-import GeoFaqSection from "@/components/geo-faq-section";
-import WindowsCta from "@/components/windows-cta";
-import ErrorBoundary from "@/components/error-boundary";
+import type { Metadata } from "next";
 
-export const metadata = {
-  title: "NovaPilot AI — Executive Stealth HUD Copilot for Windows",
+import "../css/novapilot-v2.css";
+import NovaPilotV2Home from "@/components/novapilot-v2/home";
+
+export const metadata: Metadata = {
+  title: "NovaPilot AI — Meeting recorder & transcription for Windows",
   description:
-    "Executive stealth HUD copilot for Windows featuring hardware WASAPI loopback audio ingestion, ThinkStripper reasoning extraction FSM, and WDA_EXCLUDEFROMCAPTURE screen-share protection.",
+    "NovaPilot AI is a Windows desktop app that records your calls, transcribes both sides live, and files a summary with decisions and action items. Local-first: your audio never leaves your machine. Free download, v2.7.1.",
+  openGraph: {
+    title: "NovaPilot AI — Meeting recorder & transcription for Windows",
+    description:
+      "A Windows desktop app that records your calls, transcribes both sides live, and files a summary with decisions and action items. Local-first: your audio never leaves your machine.",
+    url: "https://novapilotai.ellsimohammed8.workers.dev",
+    siteName: "NovaPilot AI",
+    images: [
+      {
+        url: "/images/hero-dormant-blueprint.jpg",
+        width: 1200,
+        height: 630,
+        alt: "NovaPilot AI — Meeting recorder & transcription for Windows",
+      },
+    ],
+    type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "NovaPilot AI — Meeting recorder & transcription for Windows",
+    description:
+      "A Windows desktop app that records your calls, transcribes both sides live, and files a summary with decisions and action items. Local-first: your audio never leaves your machine.",
+    images: ["/images/hero-dormant-blueprint.jpg"],
+  },
 };
 
 export default function Home() {
-  return (
-    <>
-      {/* Fixed Full-Screen Background Three.js Scrollytelling Canvas */}
-      <SupernovaCosmicCanvas />
-
-      {/* Interactive 3D Glowing Cyan Reticle & Micro-Trail Cursor */}
-      <Interactive3dCursor />
-
-      {/* Section 1 & 2: Hero Hook, Windows Download CTA, 4 Floating Glassmorphic Badges */}
-      <Hero />
-
-      {/* Section 3: 16:9 Commercial Video Showcase Enveloped by Phase 3 Accretion Ring */}
-      <div id="architecture" className="relative scroll-mt-20">
-        <div id="demo">
-          <ErrorBoundary fallback={<div className="min-h-[100px]" />}>
-            <VideoShowcase />
-          </ErrorBoundary>
-        </div>
-      </div>
-
-      {/* Section 4: On-Page GEO Authority & Technical FAQ Accordion */}
-      <GeoFaqSection />
-
-      {/* Section 5: High-Conversion Windows Download Portal & Verified System Specs */}
-      <WindowsCta />
-    </>
-  );
+  return <NovaPilotV2Home />;
 }

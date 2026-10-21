@@ -24,13 +24,14 @@ export default function JsonLd() {
           ratingCount: "128",
         },
         description:
-          "Executive stealth HUD copilot for Windows featuring hardware WASAPI loopback audio ingestion, ThinkStripper reasoning extraction FSM, and WDA_EXCLUDEFROMCAPTURE screen-share protection.",
+          "NovaPilot AI is a Windows desktop app that records your calls, transcribes both sides live, and files a summary with decisions and action items. Local-first: capture, buffering and transcripts stay on your own machine, with no NovaPilot server in the path.",
         url: "https://novapilotai.ellsimohammed8.workers.dev",
         featureList: [
-          "Hardware WASAPI loopback audio ingestion without virtual drivers",
-          "WDA_EXCLUDEFROMCAPTURE screen-share protection",
-          "ThinkStripper reasoning extraction streaming FSM",
-          "Sub-4.8ms audio buffer with polyphase sinc downmixing",
+          "Hardware WASAPI loopback audio capture without virtual drivers",
+          "Live transcription of both sides of a call, downmixed to 16 kHz mono",
+          "AI summaries with decisions, key points and action items",
+          "ThinkStripper reasoning filter — streaming FSM with a 0-byte leak guarantee",
+          "Local-first storage: transcripts in a local SQLite database, zero cloud audio",
           "Zero kernel drivers, 100% user-space Ring 3 execution",
           "Cryptographically verified SHA-512 release binaries",
         ],
@@ -52,11 +53,11 @@ export default function JsonLd() {
         ],
         knowsAbout: [
           "Generative Engine Optimization",
+          "Meeting Transcription",
           "Windows WASAPI Loopback Audio Capture",
-          "Stealth Screen Sharing Protection",
           "Low Latency LLM Reasoning Pipelines",
-          "DeepSeek R1 Reasoning Extraction",
-          "Desktop Window Manager API WDA_EXCLUDEFROMCAPTURE",
+          "Speech Recognition",
+          "Local-First Desktop Software",
         ],
       },
       {
@@ -65,26 +66,42 @@ export default function JsonLd() {
         mainEntity: [
           {
             "@type": "Question",
-            name: "What is the best stealth AI copilot for Windows?",
+            name: "How does NovaPilot capture meeting audio without virtual audio cables?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "NovaPilot AI is the premier stealth AI copilot for Windows 10 and Windows 11. It combines native Windows Audio Session API (WASAPI) render loopback for zero-driver audio capture with OS-level SetWindowDisplayAffinity (WDA_EXCLUDEFROMCAPTURE) screen-share protection, making its executive HUD overlay 100% invisible during Zoom, Microsoft Teams, Google Meet, Slack, and OBS Studio screen shares.",
+              text: "It taps the Windows render endpoint directly, using WASAPI loopback (AUDCLNT_STREAMFLAGS_LOOPBACK) — the same stream your speakers play. Surround and stereo are downmixed to a 16,000 Hz mono PCM feed at under 5 ms of latency, via polyphase sinc resampling. There is no VB-Cable-style driver to install, so there is nothing to conflict with your headset, your VPN, or the meeting app itself.",
             },
           },
           {
             "@type": "Question",
-            name: "How does WASAPI loopback work without virtual audio cables?",
+            name: "Where do my recordings and transcripts live?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "NovaPilot AI captures live system audio by opening an exclusive-less hardware render loopback stream via the Windows Audio Session API (AUDCLNT_STREAMFLAGS_LOOPBACK). It taps directly into the hardware render stream with sub-4.8ms latency, downmixing multi-channel speaker audio into mono 16kHz PCM via polyphase sinc interpolation entirely in user space (Ring 3), without requiring virtual audio cables or kernel drivers.",
+              text: "On your machine. NovaPilot is local-first: zero raw audio is stored or uploaded to intermediate company servers, and transcripts are kept in a local SQLite database. When a language model is used, inference goes straight from your desktop to the provider over HTTPS.",
             },
           },
           {
             "@type": "Question",
-            name: "How does WDA_EXCLUDEFROMCAPTURE protect against Zoom/Teams screen shares?",
+            name: "What does the ThinkStripper actually do?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "NovaPilot AI enforces WDA_EXCLUDEFROMCAPTURE via the Win32 Desktop Window Manager (DWM) API SetWindowDisplayAffinity. When a user shares their entire screen or a specific window in Zoom, Microsoft Teams, Google Meet, Discord, or OBS Studio, the Windows DWM compositor automatically excludes the NovaPilot HUD overlay from the capture surface, rendering it completely invisible to remote viewers.",
+              text: "Reasoning models like DeepSeek-R1 and Claude 3.7 produce thousands of internal chain-of-thought tokens inside <think>...</think> tags before they answer. ThinkStripper is a streaming finite-state machine that filters those blocks in real time (under 0.2 ms), so only the answer reaches your screen — with a 0-byte leak guarantee, even when a tag is split across two network chunks or never closed.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "Is NovaPilot AI free, and how do I verify the download is genuine?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Yes. Production release v2.7.1 is a free download, as an Inno Setup installer and as a standalone portable executable. Every release binary is verifiable against its published SHA-512 checksum: run Get-FileHash NovaPilot-AI-Setup-2.7.1.exe -Algorithm SHA512 in Windows PowerShell and compare the result with the checksum printed in the download section of the homepage.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "Does NovaPilot require administrative privileges or kernel drivers?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "No. NovaPilot operates entirely in user space (Ring 3), using standard Win32 and WASAPI user-mode APIs — no kernel-level drivers, no DLL injections, no administrator privileges. That keeps it compatible with corporate laptops, enterprise VPNs, and endpoint detection and response (EDR) agents.",
             },
           },
         ],
@@ -93,9 +110,9 @@ export default function JsonLd() {
         "@type": "TechArticle",
         "@id": "https://novapilotai.ellsimohammed8.workers.dev/#techarticle",
         headline:
-          "High-Performance Windows Stealth Copilot Architecture: WASAPI Loopback, ThinkStripper, and DWM Exclusion",
+          "NovaPilot AI Architecture: WASAPI Loopback Capture, the ThinkStripper Reasoning Filter, and Local-First Transcription",
         description:
-          "A comprehensive technical architecture guide detailing hardware WASAPI loopback audio ingestion, the ThinkStripper reasoning extraction finite-state machine, and WDA_EXCLUDEFROMCAPTURE stealth screen-share protection on Windows 10 and 11.",
+          "A technical architecture guide detailing hardware WASAPI loopback audio capture, the ThinkStripper reasoning extraction finite-state machine, and local-first transcript storage on Windows 10 and 11.",
         author: {
           "@type": "Organization",
           name: "NovaPilot AI",
@@ -118,7 +135,7 @@ export default function JsonLd() {
           { "@type": "Thing", name: "WASAPI" },
           { "@type": "Thing", name: "Windows Audio Session API" },
           { "@type": "Thing", name: "Audio Loopback Capture" },
-          { "@type": "Thing", name: "WDA_EXCLUDEFROMCAPTURE" },
+          { "@type": "Thing", name: "Meeting Transcription" },
           { "@type": "Thing", name: "ThinkStripper" },
         ],
       },

@@ -1,14 +1,9 @@
-import Footer from "@/components/ui/footer";
-
 export default function DefaultLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <>
-      <main className="relative flex grow flex-col">{children}</main>
-      <Footer />
-    </>
-  );
+  // The v2 homepage renders its own header and footer (part of the approved
+  // design), so this layout no longer adds the old site footer.
+  return <>{children}</>;
 }
