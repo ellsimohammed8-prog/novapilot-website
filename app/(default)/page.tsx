@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
 
-import "../css/novapilot-v2.css";
-import NovaPilotV2Home from "@/components/novapilot-v2/home";
+import "../css/novapilot-v3.css";
+import NovaPilotV3Home from "@/components/novapilot-v3/home";
 
 export const metadata: Metadata = {
-  title: "NovaPilot AI — Meeting recorder & transcription for Windows",
+  title: "NovaPilot AI — Every meeting, captured.",
   description:
-    "NovaPilot AI is a Windows desktop app that records your calls, transcribes both sides live, and files a summary with decisions and action items. Local-first: your audio never leaves your machine. Free download, v2.7.1.",
+    "NovaPilot AI records your calls, writes the transcript, and hands you a clear summary the moment you hang up.",
   openGraph: {
-    title: "NovaPilot AI — Meeting recorder & transcription for Windows",
+    title: "NovaPilot AI — Every meeting, captured.",
     description:
-      "A Windows desktop app that records your calls, transcribes both sides live, and files a summary with decisions and action items. Local-first: your audio never leaves your machine.",
+      "NovaPilot AI records your calls, writes the transcript, and hands you a clear summary the moment you hang up.",
     url: "https://novapilotai.ellsimohammed8.workers.dev",
     siteName: "NovaPilot AI",
     images: [
@@ -26,13 +26,13 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "NovaPilot AI — Meeting recorder & transcription for Windows",
+    title: "NovaPilot AI — Every meeting, captured.",
     description:
-      "A Windows desktop app that records your calls, transcribes both sides live, and files a summary with decisions and action items. Local-first: your audio never leaves your machine.",
+      "NovaPilot AI records your calls, writes the transcript, and hands you a clear summary the moment you hang up.",
     images: ["/images/hero-dormant-blueprint.jpg"],
   },
 };
 
 export default function Home() {
-  return <NovaPilotV2Home />;
+  return <NovaPilotV3Home />;
 }
